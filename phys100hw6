@@ -1,0 +1,1488 @@
+
+
+
+%1
+
+
+
+%a
+
+
+
+f = @(x) (exp(-9*x.^2) + exp(-1024*(x - 1/4).^2))/sqrt(pi)
+
+f = 
+
+    @(x)(exp(-9*x.^2)+exp(-1024*(x-1/4).^2))/sqrt(pi)
+
+
+
+ezplot(f,[0,1])
+
+
+quadgk(f,0,1, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',12000)
+
+ans =
+
+    0.1979
+
+
+% this does not equal 2
+
+
+
+
+
+
+%b
+
+
+
+
+g = @(x) log(x)
+
+g = 
+
+    @(x)log(x)
+
+ezplot(g,[0,1])
+
+
+quadgk(g,0,1, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',12000)
+
+ans =
+
+   -1.0000
+
+
+
+
+
+%this DOES equal -1
+
+
+
+
+
+%c
+
+
+
+
+h = @(x) sqrt(abs(x))^-1
+
+h = 
+
+    @(x)sqrt(abs(x))^-1
+
+
+
+ezplot(h,[-9,100])
+{Warning: Function failed to evaluate on array inputs;
+vectorizing the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+h = @(x) abs(x)^-1/2
+
+h = 
+
+    @(x)abs(x)^-1/2
+
+ezplot(h,[-9,100])
+{Warning: Function failed to evaluate on array inputs;
+vectorizing the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+h = @(x) abs(x).^-1/2
+
+h = 
+
+    @(x)abs(x).^-1/2
+
+ezplot(h,[-9,100])
+ezplot(h,[-20,100])
+ezplot(h,[-200,100])
+ezplot(h,[-200,100],[0,20])
+{Error using <a href="matlab:helpUtils.errorDocCallback('figure')" style="font-weight:bold">figure</a>
+Single input must be an existing figure handle or a scalar
+integer from 1 to 2147483646
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ezplot>determineAxes', '/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m', 561)" style="font-weight:bold">ezplot>determineAxes</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',561,0)">line 561</a>)
+        figure(fig);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ezplot>ezplot1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m', 447)" style="font-weight:bold">ezplot>ezplot1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',447,0)">line 447</a>)
+        cax = determineAxes(fig);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ezplot', '/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m', 145)" style="font-weight:bold">ezplot</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,0)">line 145</a>)
+                [hp, cax] = ezplot1(cax, f{1}, vars, labels,
+                args{:});
+} 
+ezplot(h,[-200,100,0,20])
+ezplot(h,[-200,100,0,2])
+
+
+
+
+quadgk(h,-9,0, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',12000)
+{Warning: Infinite or Not-a-Number value encountered.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',279,1)">quadgk>vadapt at 279</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   Inf
+
+quadgk(h,-9,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',12000)
+{Warning: Reached the limit on the maximum number of intervals
+in use. Approximate bound on error is  6.0e-01. The integral
+may not exist, or it may be difficult to approximate
+numerically. Increase MaxIntervalCount to 14730 to enable
+QUADGK to continue for another iteration.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',297,1)">quadgk>vadapt at 297</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   21.1184
+
+quadgk(h,-9,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',20000)
+{Warning: Reached the limit on the maximum number of intervals
+in use. Approximate bound on error is  3.0e+00. The integral
+may not exist, or it may be difficult to approximate
+numerically. Increase MaxIntervalCount to 27756 to enable
+QUADGK to continue for another iteration.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',297,1)">quadgk>vadapt at 297</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   23.6307
+
+quadgk(h,-9.0,0.0, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',20000)
+{Warning: Infinite or Not-a-Number value encountered.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',279,1)">quadgk>vadapt at 279</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   Inf
+
+quadgk(h,-9,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',50000)
+{Warning: Reached the limit on the maximum number of intervals
+in use. Approximate bound on error is  9.8e-01. The integral
+may not exist, or it may be difficult to approximate
+numerically. Increase MaxIntervalCount to 53710 to enable
+QUADGK to continue for another iteration.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',297,1)">quadgk>vadapt at 297</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   22.1479
+
+quad(h,-9,100,1.0e-12)
+{Warning: Maximum function count exceeded; singularity likely.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quad.m',103,1)">quad at 103</a>} 
+
+ans =
+
+   48.6327
+
+quad(h,-9,0,1.0e-12)
+{Warning: Maximum function count exceeded; singularity likely.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quad.m',103,1)">quad at 103</a>} 
+
+ans =
+
+   19.4685
+
+quad(h,0,100,1.0e-12)
+{Warning: Maximum function count exceeded; singularity likely.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quad.m',103,1)">quad at 103</a>} 
+
+ans =
+
+   22.9134
+
+quadgk(h,-9,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',50000)
+{Warning: Reached the limit on the maximum number of intervals
+in use. Approximate bound on error is  9.8e-01. The integral
+may not exist, or it may be difficult to approximate
+numerically. Increase MaxIntervalCount to 53710 to enable
+QUADGK to continue for another iteration.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',297,1)">quadgk>vadapt at 297</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   22.1479
+
+quadgk(h,-9,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',20000)
+{Warning: Reached the limit on the maximum number of intervals
+in use. Approximate bound on error is  3.0e+00. The integral
+may not exist, or it may be difficult to approximate
+numerically. Increase MaxIntervalCount to 27756 to enable
+QUADGK to continue for another iteration.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',297,1)">quadgk>vadapt at 297</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   23.6307
+
+quadgk(h,0,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',20000)
+{Warning: Infinite or Not-a-Number value encountered.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',279,1)">quadgk>vadapt at 279</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   Inf
+
+quadgk(h,1,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',20000)
+
+ans =
+
+    2.3026
+
+quadgk(h,eps,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',20000
+ quadgk(h,eps,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',20000
+                                                                              |
+{Error: Expression or statement is incorrect--possibly
+unbalanced (, {, or [.
+} 
+quadgk(h,eps,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',20000)
+{Warning: Infinite or Not-a-Number value encountered.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',279,1)">quadgk>vadapt at 279</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   Inf
+
+eps
+
+ans =
+
+   2.2204e-16
+
+quad(h,eps,100,1.0e-12)
+{Warning: Maximum function count exceeded; singularity likely.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quad.m',103,1)">quad at 103</a>} 
+
+ans =
+
+   20.3246
+
+quad(h,-9,eps,1.0e-12)
+{Warning: Maximum function count exceeded; singularity likely.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quad.m',103,1)">quad at 103</a>} 
+
+ans =
+
+   20.1035
+
+quadgk(h,0,eps, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',1e+6)
+{Warning: Infinite or Not-a-Number value encountered.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',279,1)">quadgk>vadapt at 279</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   Inf
+
+quadgk(h,-9,eps, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',1e+6)
+{Warning: Infinite or Not-a-Number value encountered.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',279,1)">quadgk>vadapt at 279</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   Inf
+
+quadgk(h,-9,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',1e+6)
+{Warning: Reached the limit on the maximum number of intervals
+in use. Approximate bound on error is  1.9e+00. The integral
+may not exist, or it may be difficult to approximate
+numerically. Increase MaxIntervalCount to 1271970 to enable
+QUADGK to continue for another iteration.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',297,1)">quadgk>vadapt at 297</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+ans =
+
+   26.2447
+
+[I err ] = quadgk(h,-9,100, 'AbsTol', 1.0e-12, 'RelTol',1.0e-12,'MaxIntervalCount',1e+6)
+{Warning: Reached the limit on the maximum number of intervals
+in use. Approximate bound on error is  1.9e+00. The integral
+may not exist, or it may be difficult to approximate
+numerically. Increase MaxIntervalCount to 1271970 to enable
+QUADGK to continue for another iteration.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',297,1)">quadgk>vadapt at 297</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+I =
+
+   26.2447
+
+
+err =
+
+    1.8845
+
+diary off
+
+
+
+
+
+%2.
+
+
+
+
+
+
+a)
+
+
+
+
+
+
+a = @(x) exp(x)
+
+a = 
+
+    @(x)exp(x)
+
+b = @(x) exp(1-x);
+
+
+
+int1 = quadgk(a,-1,0,'AbsTol', 1.0e-12, 'RelTol',1.0e-12);
+quadgk(a,-1,0,'AbsTol', 1.0e-12, 'RelTol',1.0e-12);
+[int1 int1err] = quadgk(a,-1,0,'AbsTol', 1.0e-12, 'RelTol',1.0e-12)
+
+int1 =
+
+    0.6321
+
+
+int1err =
+
+   2.6368e-17
+
+[int2 int2err] = quadgk(b,0,2,'AbsTol', 1.0e-12, 'RelTol',1.0e-12)
+
+int2 =
+
+    2.3504
+
+
+int2err =
+
+   1.7347e-16
+
+totint = int1 + int2
+
+totint =
+
+    2.9825
+
+
+
+
+
+
+b)
+ b)
+ |
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+
+
+
+c = @(x) sin(pi*x)
+
+c = 
+
+    @(x)sin(pi*x)
+
+d = @(x) sin(pi*x)^2;
+
+
+[intc intcerr] = quadgk(c,0,0.5,'AbsTol', 1.0e-12, 'RelTol',1.0e-12)
+
+intc =
+
+    0.3183
+
+
+intcerr =
+
+   3.3610e-18
+
+[intd intderr] = quadgk(d,0,1.0,'AbsTol', 1.0e-12, 'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mpower')" style="font-weight:bold"> ^ </a>
+Inputs must be a scalar and a square matrix.
+To compute elementwise POWER, use POWER (.^) instead.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)sin(pi*x)^2', '', 0)" style="font-weight:bold">@(x)sin(pi*x)^2</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+d = @(x) sin(pi*x).^2;
+
+[intd intderr] = quadgk(d,0,1.0,'AbsTol', 1.0e-12, 'RelTol',1.0e-12)
+
+intd =
+
+    0.5000
+
+
+intderr =
+
+   1.5363e-17
+
+
+
+totintcd = intc + intd
+
+totintcd =
+
+    0.8183
+
+
+
+diary off
+
+
+
+%c.
+
+
+
+%3.
+
+
+
+
+
+
+
+clear
+clc
+c = @(t) cos(0.5*pi*t^2)
+
+c = 
+
+    @(t)cos(0.5*pi*t^2)
+
+s = @(t) sin(0.5*pi*t^2);
+
+
+ezplot(c,[0,5])
+{Warning: Function failed to evaluate on array inputs; vectorizing
+the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+[intc intcerr] = quadgk(c,0,5.0,'AbsTol', 1.0e-12, 'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mpower')" style="font-weight:bold"> ^ </a>
+Inputs must be a scalar and a square matrix.
+To compute elementwise POWER, use POWER (.^) instead.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(t)cos(0.5*pi*t^2)', '', 0)" style="font-weight:bold">@(t)cos(0.5*pi*t^2)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+c = @(t) cos(0.5*pi*t.^2)
+
+c = 
+
+    @(t)cos(0.5*pi*t.^2)
+
+[intc intcerr] = quadgk(c,0,5.0,'AbsTol', 1.0e-12, 'RelTol',1.0e-12)
+
+intc =
+
+    0.5636
+
+
+intcerr =
+
+   9.8558e-14
+
+s = @(t) sin(0.5*pi*t.^2);
+ezplot(c,s)
+x3 = linspan(0:0.5:200);
+{Undefined function 'linspan' for input arguments of type
+'double'.
+} 
+x3 = linspace(0:0.5:100);
+{Error using <a href="matlab:helpUtils.errorDocCallback('linspace', '/Applications/MATLAB_R2012a.app/toolbox/matlab/elmat/linspace.m', 20)" style="font-weight:bold">linspace</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/elmat/linspace.m',20,0)">line 20</a>)
+Not enough input arguments.
+} 
+x3 = linspace(0,0.5,100);
+
+cx3 = c(x3);
+sx3 = s(x3);
+
+plot(cx3,sx3,'mo')
+plot(sx3,cx3,'mo')
+x3 = linspace(0:5:100);
+{Error using <a href="matlab:helpUtils.errorDocCallback('linspace', '/Applications/MATLAB_R2012a.app/toolbox/matlab/elmat/linspace.m', 20)" style="font-weight:bold">linspace</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/elmat/linspace.m',20,0)">line 20</a>)
+Not enough input arguments.
+} 
+x3 = linspace(0,5,100);
+
+
+cx3 = c(x3); sx3 = s(x3);
+
+plot(cx3,sx3)
+x3 = linspace(0,5,500);
+
+cx3 = c(x3); sx3 = s(x3);
+
+plot(cx3,sx3,'mo')
+
+
+
+
+
+
+
+
+
+
+
+gauss_quadrature(s,0,5.0,100)
+
+ans =
+
+    0.4992
+
+gauss_quadrature(c,0,5.0,100)
+
+ans =
+
+    0.5636
+
+
+
+
+diary off
+
+
+%4
+
+
+
+
+
+
+
+
+clear
+clc
+f = @(x) exp(-x^2)*cos(x);
+ezplot(f)
+{Warning: Function failed to evaluate on array inputs; vectorizing
+the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+ezplot(f,[-100,100])
+{Warning: Function failed to evaluate on array inputs; vectorizing
+the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+ezplot(f,[-5,5])
+{Warning: Function failed to evaluate on array inputs; vectorizing
+the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+ezplot(f,[-5,5])
+{Warning: Function failed to evaluate on array inputs; vectorizing
+the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+ezplot(f,[-15,15])
+{Warning: Function failed to evaluate on array inputs; vectorizing
+the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+ezplot(f,[-15,15,-15,15])
+{Warning: Function failed to evaluate on array inputs; vectorizing
+the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+ezplot(f,[-15,15,-1,2])
+{Warning: Function failed to evaluate on array inputs;
+vectorizing the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+ezplot(f,[-15,15,0,1])
+{Warning: Function failed to evaluate on array inputs;
+vectorizing the function may
+speed up its evaluation and avoid the need to loop over array
+elements.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',483,1)">ezplot>ezplot1 at 483</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/specgraph/ezplot.m',145,1)">ezplot at 145</a>} 
+
+
+
+
+
+[I err ] = quadgk(f,-inf,inf,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mpower')" style="font-weight:bold"> ^ </a>
+Inputs must be a scalar and a square matrix.
+To compute elementwise POWER, use POWER (.^) instead.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)exp(-x^2)*cos(x)', '', 0)" style="font-weight:bold">@(x)exp(-x^2)*cos(x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f4', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 386)" style="font-weight:bold">quadgk/f4</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',386,0)">line 386</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 214)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',214,0)">line 214</a>)
+    [q,errbnd] = vadapt(@f4,interval);
+} 
+f = @(x) exp(-x.^2)*cos(x);
+
+
+[I err ] = quadgk(f,-inf,inf,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)exp(-x.^2)*cos(x)', '', 0)" style="font-weight:bold">@(x)exp(-x.^2)*cos(x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f4', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 386)" style="font-weight:bold">quadgk/f4</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',386,0)">line 386</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 214)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',214,0)">line 214</a>)
+    [q,errbnd] = vadapt(@f4,interval);
+} 
+[I err ] = quadgk(f,-1000,1000,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)exp(-x.^2)*cos(x)', '', 0)" style="font-weight:bold">@(x)exp(-x.^2)*cos(x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+help quad
+ <strong>quad</strong>   Numerically evaluate integral, adaptive Simpson quadrature.
+    Q = <strong>quad</strong>(FUN,A,B) tries to approximate the integral of scalar-valued
+    function FUN from A to B to within an error of 1.e-6 using recursive
+    adaptive Simpson quadrature. FUN is a function handle. The function
+    Y=FUN(X) should accept a vector argument X and return a vector result
+    Y, the integrand evaluated at each element of X.
+ 
+    Q = <strong>quad</strong>(FUN,A,B,TOL) uses an absolute error tolerance of TOL
+    instead of the default, which is 1.e-6.  Larger values of TOL
+    result in fewer function evaluations and faster computation,
+    but less accurate results.  The <strong>quad</strong> function in MATLAB 5.3 used
+    a less reliable algorithm and a default tolerance of 1.e-3.
+ 
+    Q = <strong>quad</strong>(FUN,A,B,TOL,TRACE) with non-zero TRACE shows the values
+    of [fcnt a b-a Q] during the recursion. Use [] as a placeholder to
+    obtain the default value of TOL.
+ 
+    [Q,FCNT] = <strong>quad</strong>(...) returns the number of function evaluations.
+ 
+    Use array operators .*, ./ and .^ in the definition of FUN
+    so that it can be evaluated with a vector argument.
+ 
+    QUADV vectorizes <strong>quad</strong> for array-valued FUN.
+ 
+    Consider using INTEGRAL instead of <strong>quad</strong>. INTEGRAL is often faster and
+    more accurate, can handle mild singularities at the boundaries, and
+    supports improper integrals.
+ 
+    Example:
+       Q = quad(@myfun,0,2);
+    where the file myfun.m defines the function:
+       %-------------------%
+       function y = myfun(x)
+       y = 1./(x.^3-2*x-5);
+       %-------------------%
+ 
+    or, use a parameter for the constant:
+       Q = quad(@(x)myfun2(x,5),0,2);
+    where the file myfun2.m defines the function:
+       %----------------------%
+       function y = myfun2(x,c)
+       y = 1./(x.^3-2*x-c);
+       %----------------------%
+ 
+    Class support for inputs A, B, and the output of FUN:
+       float: double, single
+ 
+    See also <a href="matlab:help integral">integral</a>, <a href="matlab:help integral2">integral2</a>, <a href="matlab:help integral3">integral3</a>, <a href="matlab:help quadv">quadv</a>, <a href="matlab:help quadl">quadl</a>, <a href="matlab:help quadgk">quadgk</a>,
+    <a href="matlab:help quad2d">quad2d</a>, <a href="matlab:help dblquad">dblquad</a>, <a href="matlab:help triplequad">triplequad</a>, <a href="matlab:help trapz">trapz</a>, <a href="matlab:help function_handle">function_handle</a>.
+
+    Reference page in Help browser
+       <a href="matlab:doc quad">doc quad</a>
+
+help quadl
+ <strong>quadl</strong>  Numerically evaluate integral, adaptive Lobatto quadrature.
+    Q = <strong>quadl</strong>(FUN,A,B) tries to approximate the integral of scalar-valued
+    function FUN from A to B to within an error of 1.e-6 using high order
+    recursive adaptive quadrature.  FUN is a function handle. The function
+    Y=FUN(X) should accept a vector argument X and return a vector result
+    Y, the integrand evaluated at each element of X.
+ 
+    Q = <strong>quadl</strong>(FUN,A,B,TOL) uses an absolute error tolerance of TOL
+    instead of the default, which is 1.e-6.  Larger values of TOL
+    result in fewer function evaluations and faster computation,
+    but less accurate results.
+ 
+    Q = <strong>quadl</strong>(FUN,A,B,TOL,TRACE) with non-zero TRACE shows the values
+    of [fcnt a b-a Q] during the recursion. Use [] as a placeholder to
+    obtain the default value of TOL.
+ 
+    [Q,FCNT] = <strong>quadl</strong>(...) returns the number of function evaluations.
+ 
+    Use array operators .*, ./ and .^ in the definition of FUN
+    so that it can be evaluated with a vector argument.
+ 
+    Consider using INTEGRAL instead of <strong>quadl</strong>. INTEGRAL is often faster and
+    more accurate, can handle mild singularities at the boundaries, and
+    supports improper integrals.
+ 
+    QUADV vectorizes QUAD (not <strong>quadl</strong>) for array-valued FUN.
+ 
+    Example:
+       Q = quadl(@myfun,0,2);
+    where the file myfun.m defines the function:
+       %-------------------%
+       function y = myfun(x)
+       y = 1./(x.^3-2*x-5);
+       %-------------------%
+ 
+    or, use a parameter for the constant:
+       Q = quadl(@(x)myfun2(x,5),0,2);
+    where the file myfun2.m defines the function:
+       %----------------------%
+       function y = myfun2(x,c)
+       y = 1./(x.^3-2*x-c);
+       %----------------------%
+ 
+    Class support for inputs A, B, and the output of FUN:
+       float: double, single
+ 
+    See also <a href="matlab:help integral">integral</a>, <a href="matlab:help integral2">integral2</a>, <a href="matlab:help integral3">integral3</a>, <a href="matlab:help quad">quad</a>, <a href="matlab:help quadgk">quadgk</a>, <a href="matlab:help quadv">quadv</a>, <a href="matlab:help quad2d">quad2d</a>,
+    <a href="matlab:help dblquad">dblquad</a>, <a href="matlab:help triplequad">triplequad</a>, <a href="matlab:help trapz">trapz</a>, <a href="matlab:help function_handle">function_handle</a>.
+
+    Reference page in Help browser
+       <a href="matlab:doc quadl">doc quadl</a>
+
+[I err ] = quadgk(f,-3,3,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)exp(-x.^2)*cos(x)', '', 0)" style="font-weight:bold">@(x)exp(-x.^2)*cos(x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) exp(-x.^2)*cos(x.);
+ f = @(x) exp(-x.^2)*cos(x.);
+                          |
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+f = @(x) cos(x)*exp(-x.^2);
+[I err ] = quadgk(f,-3,3,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)cos(x)*exp(-x.^2)', '', 0)" style="font-weight:bold">@(x)cos(x)*exp(-x.^2)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+help gauss_hermite
+  function result = gauss_hermite(f, n)
+   INPUT: 
+          f      = 1D function ['string'], function handle, or inline 
+          n      = number of dependent values
+   OUTPUT: 
+          result = integral 
+  MODIFICATION of gaherm.m, integration from -infinity to infinity
+  Numerical Methods Using MATLAB, 2nd Ed, p. 181
+   G Lindfield & J Penny (Prentice Hall: Upper Saddle River, NJ)
+  Scientific Computing with MATLAB, A Quarteroni & F Saleri 
+  (Springer-Verlag: Berlin), p. 93
+
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)cos(x)*exp(-x.^2)', '', 0)" style="font-weight:bold">@(x)cos(x)*exp(-x.^2)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) cos(x)exp(-x.^2);
+ f = @(x) cos(x)exp(-x.^2);
+               |
+{Error: Unexpected MATLAB expression.
+} 
+f = @(x) (cos(x))(exp(-x.^2));
+ f = @(x) (cos(x))(exp(-x.^2));
+                 |
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+f = @(x) ((cos(x))(exp(-x.^2)));
+ f = @(x) ((cos(x))(exp(-x.^2)));
+                  |
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+f = @(x) .cos(x)(exp(-x.^2);
+ f = @(x) .cos(x)(exp(-x.^2);
+         |
+{Error: Unexpected MATLAB operator.
+} 
+f = @(x) cos(x)(exp(-x.^2);
+ f = @(x) cos(x)(exp(-x.^2);
+                          |
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+f = @(x) cos(x)*exp(-x^2);
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mpower')" style="font-weight:bold"> ^ </a>
+Inputs must be a scalar and a square matrix.
+To compute elementwise POWER, use POWER (.^) instead.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)cos(x)*exp(-x^2)', '', 0)" style="font-weight:bold">@(x)cos(x)*exp(-x^2)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) cos(x)*exp(-x*x);
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)cos(x)*exp(-x*x)', '', 0)" style="font-weight:bold">@(x)cos(x)*exp(-x*x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) cos(x)*exp(-x*x');
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+
+I =
+
+     0
+
+
+err =
+
+     0
+
+f = @(x) cos(x)*exp(-x'*x);
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Warning: Infinite or Not-a-Number value encountered.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',279,1)">quadgk>vadapt at 279</a>
+  In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,1)">quadgk at 189</a>} 
+
+I =
+
+   NaN
+
+
+err =
+
+   NaN
+
+f = @(x) cos(x')*exp(-x'*x);
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)cos(x'')*exp(-x''*x)', '', 0)" style="font-weight:bold">@(x)cos(x')*exp(-x'*x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) exp(-x'*x)*cos(x');
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('quadgk/finalInputChecks', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 452)" style="font-weight:bold">quadgk/finalInputChecks</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',452,0)">line 452</a>)
+Output of the function must be the same size as the input.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 332)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',332,0)">line 332</a>)
+            finalInputChecks(x,fx);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) exp(-x'*x)*cos(x);
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)exp(-x''*x)*cos(x)', '', 0)" style="font-weight:bold">@(x)exp(-x'*x)*cos(x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) exp(-x*x')*cos(x);
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+
+I =
+
+     0
+
+
+err =
+
+     0
+
+f = @(x) exp(-x.^2)*cos(x);
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)exp(-x.^2)*cos(x)', '', 0)" style="font-weight:bold">@(x)exp(-x.^2)*cos(x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) exp(-x.^2)*cos(x');
+[I err ] = quadgk(f,-1e+6,1e+6,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('quadgk/finalInputChecks', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 452)" style="font-weight:bold">quadgk/finalInputChecks</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',452,0)">line 452</a>)
+Output of the function must be the same size as the input.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 332)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',332,0)">line 332</a>)
+            finalInputChecks(x,fx);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+[I err ] = quadgk(f,-1e+3,1e+3,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('quadgk/finalInputChecks', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 452)" style="font-weight:bold">quadgk/finalInputChecks</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',452,0)">line 452</a>)
+Output of the function must be the same size as the input.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 332)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',332,0)">line 332</a>)
+            finalInputChecks(x,fx);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) cos(x)*exp(-x.^2);
+
+
+[I err ] = quadgk(f,-1e+3,1e+3,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)cos(x)*exp(-x.^2)', '', 0)" style="font-weight:bold">@(x)cos(x)*exp(-x.^2)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) cos(x')*exp(-x.^2);
+[I err ] = quadgk(f,-1e+3,1e+3,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('quadgk/finalInputChecks', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 452)" style="font-weight:bold">quadgk/finalInputChecks</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',452,0)">line 452</a>)
+Output of the function must be the same size as the input.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 332)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',332,0)">line 332</a>)
+            finalInputChecks(x,fx);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) exp(-x.^2)*cos(x);
+[I err ] = quadgk(f,-1e+3,1e+3,'Abstol',1.0e-12,'RelTol',1.0e-12)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)exp(-x.^2)*cos(x)', '', 0)" style="font-weight:bold">@(x)exp(-x.^2)*cos(x)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/evalFun', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 331)" style="font-weight:bold">quadgk/evalFun</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',331,0)">line 331</a>)
+            fx = FUN(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/f1', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 349)" style="font-weight:bold">quadgk/f1</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',349,0)">line 349</a>)
+        [y,too_close] = evalFun(tt);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk/vadapt', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 250)" style="font-weight:bold">quadgk/vadapt</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',250,0)">line 250</a>)
+            [fx,too_close] = f(x);
+
+Error in <a href="matlab:helpUtils.errorDocCallback('quadgk', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m', 189)" style="font-weight:bold">quadgk</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/quadgk.m',189,0)">line 189</a>)
+    [q,errbnd] = vadapt(@f1,interval);
+} 
+f = @(x) exp(-x.^2).*cos(x);
+[I err ] = quadgk(f,-1e+3,1e+3,'Abstol',1.0e-12,'RelTol',1.0e-12)
+
+I =
+
+    1.3804
+
+
+err =
+
+   3.2281e-15
+
+exp(-100)
+
+ans =
+
+   3.7201e-44
+
+actual = sqrt(pi)*exp(-0.25);
+ans-actual
+
+ans =
+
+   -1.3804
+
+I-actual
+
+ans =
+
+     0
+
+format long
+ans
+
+ans =
+
+     0
+
+diary off
+
+
+
+%5
+
+
+
+
+
+
+
+gammafun = @(x) (t^(x-1))*e^(-t);
+
+
+
+
+
+
+
+
+type gammaests
+
+
+clear x
+
+
+difmat = zeros(21,2);
+difmat(:,1) = linspace(0,20,21)';
+
+
+
+for i = 0:20
+    x=i;
+    gammafun = @(t) (t.^(x-1)).*exp(-t);
+    dif = quadgk(gammafun,0,inf) - gamma(x);
+    difmat(i+1,2) = dif;
+end
+
+difmat
+
+
+
+
+
+gammaests
+
+difmat =
+
+   1.0e+03 *
+
+                   0                -Inf
+   0.001000000000000                   0
+   0.002000000000000   0.000000000000000
+   0.003000000000000   0.000000000000000
+   0.004000000000000   0.000000000000000
+   0.005000000000000   0.000000000000000
+   0.006000000000000  -0.000000000000002
+   0.007000000000000  -0.000000000000105
+   0.008000000000000  -0.000000000001790
+   0.009000000000000  -0.000000000000065
+   0.010000000000000  -0.000000000000058
+   0.011000000000000                   0
+   0.012000000000000                   0
+   0.013000000000000  -0.000000000059605
+   0.014000000000000   0.000000000953674
+   0.015000000000000                   0
+   0.016000000000000   0.000000488281250
+   0.017000000000000                   0
+   0.018000000000000  -0.000562500000000
+   0.019000000000000  -0.032000000000000
+   0.020000000000000  -1.008000000000000
+
+
+
+
+
+% best x's are at x = (1,11,12,15,17)
+
+
+
+
+diary off
+
+
+
+%6
+
+
+
+
+
+mybeta
+
+betadif =
+
+   NaN
+
+ezplot(betafun)
+z=5;w=5;
+betafun = @(t) t.^(z-1) .* (1-t).^(w-1);
+
+
+ezplot(betafun)
+mybeta
+
+betadif =
+
+    -1.301042606982605e-18
+
+
+
+
+
+diary off
+
+
+
+type mybeta
+
+
+
+%this is a function for phys100hw6, made to evaluate the integral of the 
+%beta function at z and w, and compare it to the built-in function
+%beta(z,w)
+
+
+z = 5; w = 5;
+
+
+betafun = @(t) t.^(z-1) .* (1-t).^(w-1);
+
+quadbetafun = quadgk(betafun,0,1);
+
+betadif = quadbetafun - beta(z,w)
+
+
+diary off
+
+
+%7)
+
+
+
+
+
+clear
+clc
+m = @(x) 4/(1+x^2);  gauss_quadrature(m,0,1,30
+ m = @(x) 4/(1+x^2);  gauss_quadrature(m,0,1,30
+                                              |
+{Error: Expression or statement is incorrect--possibly unbalanced
+(, {, or [.
+} 
+m = @(x) 4/(1+x^2);  gauss_quadrature(m,0,1,30)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mpower')" style="font-weight:bold"> ^ </a>
+Inputs must be a scalar and a square matrix.
+To compute elementwise POWER, use POWER (.^) instead.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)4/(1+x^2)', '', 0)" style="font-weight:bold">@(x)4/(1+x^2)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('gauss_quadrature', '/Users/spritelikepuck/Dropbox/Computational Physics/plys100_class_notes_2013/9_quadrature/gauss_quadrature.m', 14)" style="font-weight:bold">gauss_quadrature</a> (<a href="matlab: opentoline('/Users/spritelikepuck/Dropbox/Computational Physics/plys100_class_notes_2013/9_quadrature/gauss_quadrature.m',14,0)">line 14</a>)
+  s      = sum(c.*f(x));
+} 
+m = @(x) 4/(1+x.^2);  gauss_quadrature(m,0,1,30)
+{Error using <a href="matlab:helpUtils.errorDocCallback('mrdivide')" style="font-weight:bold"> / </a>
+Matrix dimensions must agree.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(x)4/(1+x.^2)', '', 0)" style="font-weight:bold">@(x)4/(1+x.^2)</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('gauss_quadrature', '/Users/spritelikepuck/Dropbox/Computational Physics/plys100_class_notes_2013/9_quadrature/gauss_quadrature.m', 14)" style="font-weight:bold">gauss_quadrature</a> (<a href="matlab: opentoline('/Users/spritelikepuck/Dropbox/Computational Physics/plys100_class_notes_2013/9_quadrature/gauss_quadrature.m',14,0)">line 14</a>)
+  s      = sum(c.*f(x));
+} 
+m = @(x) 4./(1+x.^2);  gauss_quadrature(m,0,1,30)
+
+ans =
+
+   3.141592653589795
+
+ans - pi
+
+ans =
+
+     1.776356839400250e-15
+
+gauss_quadrature(m,0,1,30)
+
+ans =
+
+   3.141592653589795
+
+
+
+
+
+
+
+
+
+gauss_quadrature(m,0,1,3)
+
+ans =
+
+   3.141068139963167
+
+ans - pi
+
+ans =
+
+    -5.245136266265327e-04
+
+
+
+
+
+
+
+
+
+h1 = gauss_quadrature(m,0,1/3,3); h2 = type mybeta
+ h1 = gauss_quadrature(m,0,1/3,3); h2 = type mybeta
+                                            |
+{Error: Unexpected MATLAB expression.
+} 
+h1 = gauss_quadrature(m,0,1/2,3); h2 = gauss_quadrature(m,1/2,1,3); 
+(h1 + h2) - pi
+
+ans =
+
+    -1.431206960056386e-06
+
+
+
+
+t1 = gauss_quadrature(m,0,1/3,3); t2 = gauss_quadrature(m,1/3,2/3,3);
+t3 = gauss_quadrature(m,2/3,1,3);
+
+
+(t1 + t2 + t3) - pi
+
+ans =
+
+    -4.232269024129209e-08
+
+
+
+
+
+% surprise it's getting more accurate
+
+
+diary off

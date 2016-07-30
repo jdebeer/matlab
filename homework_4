@@ -1,0 +1,261 @@
+Andre-Jacques de Beer                                           Homework 4
+Phys 108
+
+
+1) 7.4
+
+
+type lastfirst
+
+function name = lastfirst
+
+
+%This function prompts a user separately for his/her first/last name
+%   form of call: lastfirst
+%question on this regarding why the function returns 'ans' instead of
+%'name'
+
+last = input('Please enter last name: ', 's');
+first = input('Please enter first name: ', 's');
+
+name = sprintf('%s, %s', last, first)
+
+end
+
+
+lastfirst
+Please enter last name: de Beer
+Please enter first name: Andre-Jacques
+
+ans =
+
+de Beer, Andre-Jacques
+
+
+
+
+2) 7.12
+
+
+type strs2mat
+
+function mat = strs2mat( str1, str2 )
+
+%strs2mat accepts two strings and returns a character matrix with two
+%strings in separate rows
+
+n = abs((length(str1) - length(str2)));
+
+if (ischar(str1) && ischar(str2)) && ((length(str1) > length(str2)) || (length(str1) == length(str2)))
+   st2 = [str2 blanks(n) ];
+   mat = [str1; st2 ];
+   
+elseif (ischar(str1) && ischar(str2))
+    
+    st1 = [str1 blanks(n) ];
+    mat = [st1; str2];
+    
+else
+    disp('these are not strings')
+    
+end
+
+
+end
+
+
+strs2mat('love', 'jacques')
+
+ans =
+
+love   
+jacques
+
+strs2mat([1:6], [1:4])
+these are not strings
+
+
+
+
+3) 7.17
+
+
+xnums = '12x3x45x2'
+
+xnums =
+
+12x3x45x2
+
+numsvec = [12 3 45 2 ]
+
+numsvec =
+
+    12     3    45     2
+
+sum(numsvec')
+
+ans =
+
+    62
+
+
+
+
+4) 7.18
+
+
+
+
+type assembly_add
+
+function sum = assembly_add(addst)
+
+%assembly_add recieves a string with format 'ADD num1,num2' and adds the
+%two numbers before and after the comma
+
+
+
+root = 'ADD ';
+
+
+if ischar(addst) && strcmp(addst(1:4),root) && (length(strfind(addst,',')) == 1)
+    
+bp = strfind(addst,',');
+strlen = length(addst);
+num1 = str2num(addst(5:(bp-1)));
+num2 = str2num(addst((bp+1):strlen));
+
+sum = num1 + num2;
+
+else
+    disp('the string submitted is not in the correct format; correct format is: ''ADD num1,num2''')
+    
+end
+end
+
+assembly_add('ADD 24,16')
+
+ans =
+
+    40
+
+assembly_add('ADD24,160')
+the string submitted is not in the correct format; correct format is: 'ADD num1,num2'
+assembly_add('ADD 24,160')
+
+ans =
+
+   184
+
+assembly_add('ADD 24,160,160')
+the string submitted is not in the correct format; correct format is: 'ADD num1,num2'
+
+
+
+
+
+5) 7.21
+
+
+type singlespace
+
+function singlespace(spacestring)
+
+%singlespace receives a string and deletes all excessive blanks.
+%Excessive blanks are ones that follow the first blank between words
+
+%returns the string with blanks removed
+
+
+spacelocvec = strfind(spacestring, ' ');
+
+i = 1;
+
+strlen = length(spacelocvec);
+
+
+for i = 1:(strlen - 1)
+    
+    if (spacelocvec(i) == (spacelocvec(i+1) - 1)) 
+        
+       spacestring(spacelocvec(i+1)) = '/';
+       
+       
+    end
+    
+    i = i + 1;
+    
+end
+
+newstring = strrep(spacestring,'/','');
+
+sprintf('%c',newstring)
+
+end
+
+
+
+
+singlespace('This      has    way too    many   spaces')
+
+ans =
+
+This has way too many spaces
+
+
+
+
+6) 7.22
+
+
+
+type slash_to_blank
+
+function slash_to_blank(slashstring)
+
+%slash_to_blank recieves a string in which the words are separated by
+%slashes and replaces the slashes with spaces
+
+slashstring = strrep(slashstring, '/', ' ');
+
+sprintf('%c',slashstring)
+
+end
+
+
+
+slash_to_blank('yes/you/may/go/home')
+
+ans =
+
+yes you may go home
+
+
+
+
+7) 7.26
+
+
+int2str([3 4 5 6])
+
+ans =
+
+3  4  5  6
+
+num2str([3.4 3.2 2.98])
+
+ans =
+
+3.4         3.2        2.98
+
+
+
+
+
+
+
+
+
+
+
+

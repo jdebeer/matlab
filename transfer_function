@@ -1,0 +1,17 @@
+A=tf([1], [40 900 5000])
+
+A =
+ 
+            1
+  ---------------------
+  40 s^2 + 900 s + 5000
+ 
+Continuous-time transfer function.
+
+step(A)
+siso
+{Undefined function or variable 'siso'.
+} 
+isio
+{Undefined function or variable 'isio'.
+} 

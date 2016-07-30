@@ -1,0 +1,367 @@
+Andre-Jacques de Beer                                           Homework 6
+Phys 108
+
+
+1) 9.3
+
+type readpatwts
+
+
+
+%readpatwts opens a file and prints the data into strings in the form
+%last,first followed by the weight; it will also calculate and print the
+%average weight.  It will also indicate if the file close was successful
+
+tot = 0;
+count = 0;
+
+fileid = fopen('patwts.dat');
+if fileid == -1
+    disp('File open not successful')
+else
+    while ~feof(fileid)
+        str = fgetl(fileid);
+        count = count + 1;
+        [first str] = strtok(str);
+        [last weight] = strtok(str);
+        weight = str2num(weight);
+        tot = tot + weight;
+        fprintf('%s, %s %.1f\n',last,first,weight)
+    end
+    
+    fprintf('the ave weight is %.2f\n',tot / count)
+    
+    closeresult = fclose(fileid);
+    if closeresult == 0
+        disp('File close successful')
+    else
+        disp('File close not successful')
+    end
+end
+
+
+
+readpatwts
+George, Darby 166.2
+Dee, Helen 143.5
+Lupa, Giovanni 192.4
+Donovan, Cat 215.1
+the ave weight is 179.30
+File close successful
+
+
+
+
+
+
+2) 9.5
+
+
+
+
+type partsinv
+
+%this script reads data that is stored as a matrix in a file.  The dollar
+%worth of the inventory is found and displayed
+
+fileid = fopen('parts_inv.dat');
+if fileid == -1
+    disp('File open was not successful')
+else
+    mat = fscanf(fileid,'%f %f %f', [3 inf]);
+    closeresult = fclose(fileid);
+    if closeresult == 0
+        disp('File close successful')
+    else
+        disp('File close not successful')
+    end
+end
+
+mat = mat';
+Value = sum(mat(:,2).*mat(:,3));
+fprintf('Total dollar amount of inventory: $%.2f\n',Value)
+
+
+
+
+
+partsinv
+File close successful
+Total dollar amount of inventory: $1967.22
+
+
+
+
+3) 9.6
+
+
+type mathfile.dat
+
+5+2
+4-3
+8-1
+3+3
+
+
+
+type mathfile
+
+% This script reads a text file and evaluates the expression on each line
+
+fileid = fopen('mathfile.dat');
+if fileid == -1
+    disp('File open not successful')
+else
+    while ~feof(fileid)
+        str = fgetl(fileid);
+        result = eval(str);
+        x = str2num(str(1));
+        operator = str(2);
+        y = str2num(str(3));
+        fprintf('%d %c %d = %d\n',x,operator,y,result)
+    end
+    
+    closeresult = fclose(fileid);
+    if closeresult == 0
+        disp('File close successful')
+    else
+        disp('File close not successful')
+    end
+end
+
+
+
+mathfile
+5 + 2 = 7
+4 - 3 = 1
+8 - 1 = 7
+3 + 3 = 6
+File close successful
+
+
+
+4) 9.7
+
+
+
+
+type letspacereal.dat
+
+e5.4
+f3.3
+c2.2
+f1.1
+c2.2
+
+
+
+
+type letspacereal
+
+%script reads data from a file and sums the numbers
+
+fileid = fopen('letspacereal.dat');
+
+if fileid == -1
+    disp('File open not successful')
+else
+    scan = textscan(fileid,'%c %f');
+    closeresult = fclose(fileid);
+    if closeresult == 0
+        disp('File close successful')
+    else
+        disp('File close not successful')
+    end
+end
+
+
+total = sum(scan{2});
+
+fprintf('The sum of the number is: %.2f\n',total)
+
+
+letspacereal
+File close successful
+The sum of the number is: 14.20
+
+
+
+
+5) 9.8
+
+
+
+
+
+type phonenos.dat
+
+6012425932
+6178987654
+8034562468
+
+
+
+
+load phonenos.dat
+
+str = num2str(phonenos)';
+fprintf('%c%c%c-%c%c%c-%c%c%c%c\n',str)
+601-242-5932
+617-898-7654
+803-456-2468
+
+
+6) 9.9
+
+
+
+type phonenos.dat
+
+6012425932
+6178987654
+8034562468
+
+
+
+
+type phonenose
+
+%script reads a list of phone numbers and then displays them in an
+%alternative format
+
+fileid = fopen('phonenos.dat');
+
+if fileid == -1
+    disp('File open not successful')
+else
+    scan = textscan(fileid,'%f');
+    closeresult = fclose(fileid);
+    if closeresult == 0
+        disp('File close successful')
+    else
+        disp('File close not successful')
+    end
+end
+
+
+str = num2str(scan{1})';
+fprintf('%c%c%c-%c%c%c-%c%c%c%c\n',str)
+
+
+
+
+phonenose
+File close successful
+601-242-5932
+617-898-7654
+803-456-2468
+
+
+
+7) 9.14
+
+
+tstid = fopen('testread.dat')
+
+
+     3
+
+
+
+fileline = fgetl(tstid)
+
+
+110x0.123y5.67z8.45
+
+
+
+
+[beg endline] = strtok(fileline,'y')
+
+
+beg =
+
+110x0.123
+
+
+endline =
+
+y5.67z8.45
+
+
+
+length(beg)
+
+
+
+     9
+
+feof(tstid)
+
+
+
+     0
+
+8) 9.20
+
+
+
+
+type mm.dat
+
+{ 33, 2, 11}
+{ 45, 9, 3}
+
+
+
+
+type mmm
+
+%this reads the data from a file, manipulates the numbers and writes a new
+%matrix
+
+matrix = [];
+
+fileid = fopen('mm.dat');
+
+if fileid == -1
+    disp('File open not successful')
+else
+    while ~feof(fileid)
+        str = fgetl(fileid);
+        [x str] = strtok(str,',');
+        x = str2num(x(2:end));
+        [y str] = strtok(str,',');
+        y = str2num(y);
+        [z str] = strtok(str,',');
+        z = str2num(z(1:end-1));
+        matrix = [matrix;x,y,z];
+    end
+    
+    closeresult = fclose(fileid);
+    if closeresult == 0
+        disp('File close successful')
+    else
+        disp('File close not successful')
+    end
+end
+
+
+save newmm.dat matrix -ascii
+
+
+
+
+mmm
+File close successful
+
+
+
+type newmm.dat
+
+   3.3000000e+01   2.0000000e+00   1.1000000e+01
+   4.5000000e+01   9.0000000e+00   3.0000000e+00
+
+
+
+

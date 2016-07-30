@@ -1,0 +1,907 @@
+
+
+%1.
+
+
+
+A = [ 1 -1 3; 2 0 5]
+
+A =
+
+     1    -1     3
+     2     0     5
+
+B = [ 2 1 0 ; -3 -1 5; 1 3 4]
+
+B =
+
+     2     1     0
+    -3    -1     5
+     1     3     4
+
+C = [ 4 2; 3 -1; 2 -4];
+D = [1 -1 4; 0 2 -2; 0 0 3];
+
+
+%a)
+
+
+
+2*A + C
+{Error using <a href="matlab:helpUtils.errorDocCallback('plus')" style="font-weight:bold"> + </a>
+Matrix dimensions must agree.
+} 
+2*A + C'
+
+ans =
+
+     6     1     8
+     6    -1     6
+
+
+
+%b)
+
+
+
+A*D
+
+ans =
+
+     1    -3    15
+     2    -2    23
+
+
+
+
+
+
+%c)
+
+
+
+B*A'
+
+ans =
+
+     1     4
+    13    19
+    10    22
+
+
+
+
+%d)
+
+
+
+
+C'*D
+
+ans =
+
+     4     2    16
+     2    -4    -2
+
+
+
+
+%e)
+
+
+
+A*C
+
+ans =
+
+     7    -9
+    18   -16
+
+
+
+
+
+
+
+%2.
+
+
+
+%A is nonsingular when alpha does not equal 2
+
+
+
+%3.
+
+
+
+%a.
+
+
+
+
+
+A = [ 3.02 -1.05 2.53;  4.33 0.56 -1.78;  -0.83 -0.54 1.47];
+
+
+B = [ -1.61; 7.23; -3.38]; 
+
+Xa = linsolve(A,B)
+
+Xa =
+
+   0.999999999999996
+   1.999999999999851
+  -1.000000000000057
+
+
+
+
+
+%b.
+
+
+
+
+
+A(1,1) = 3.01;
+
+X2 = linsolve(A,B)
+
+X2 =
+
+   1.060007827107874
+   4.125364177935920
+  -0.185372005044263
+
+
+
+
+
+%c.
+
+
+
+
+
+A = [ 3.02 -1.05 2.53;  4.33 0.56 -1.78;  -0.83 -0.54 1.47];
+
+
+B(3,1) = -3.39;
+
+Xc = linsolve(A,B); Xb = X2;
+
+
+Xb - Xa
+
+ans =
+
+   0.060007827107878
+   2.125364177936069
+   0.814627994955794
+
+
+
+Xc - Xa
+
+ans =
+
+   0.185502727981289
+   6.699142634450310
+   2.558846453624243
+
+
+% the change in the x components was much greater when the right hand side coefficient was changed.
+
+
+
+
+%4.
+
+%a.
+
+
+
+
+
+
+
+clear
+
+
+A = [6 -2 3; 1 -1/3 1/3; 1 3  -1];
+B = [5;2;5];
+X = linsolve(A,B)
+
+X =
+
+   3.700000000000000
+  -1.900000000000000
+  -7.000000000000000
+
+
+
+
+
+
+
+%b.
+
+
+
+
+
+
+A(1,1) = 6.01
+
+A =
+
+  Columns 1 through 2
+
+   6.010000000000000  -2.000000000000000
+   1.000000000000000  -0.333333333333333
+   1.000000000000000   3.000000000000000
+
+  Column 3
+
+   3.000000000000000
+   0.333333333333333
+  -1.000000000000000
+
+
+
+X1 = linsolve(A,B)
+
+X1 =
+
+   3.707414829659317
+  -1.914829659318635
+  -7.037074148296589
+
+
+
+Xdiffb = X1 - X0
+{Undefined function or variable 'X0'.
+} 
+Xdiffb = X1 - X
+
+Xdiffb =
+
+   0.007414829659317
+  -0.014829659318635
+  -0.037074148296589
+
+
+
+
+%c)
+
+
+A = [6 -2 3; 1 -1/3 1/3; 1 3  -1];
+
+
+
+B(2,1) = 1.99;
+
+X2 = linsolve(A,B)
+
+X2 =
+
+   3.679000000000000
+  -1.873000000000000
+  -6.940000000000000
+
+
+
+
+Xdiffc = X2 - X
+
+Xdiffc =
+
+  -0.020999999999999
+   0.027000000000000
+   0.060000000000000
+
+
+
+
+
+
+
+
+
+
+
+%5.
+
+
+
+
+
+
+
+
+
+%a.
+
+
+
+
+a = [1 2; 1.0001 2];
+
+
+
+cond(a)
+
+ans =
+
+     5.000100002987370e+04
+
+
+
+
+%b.
+
+
+
+
+
+ b = [2.001 1.999; 1.999 2.001];
+
+cond(b)
+
+ans =
+
+     2.000000000000302e+03
+
+
+
+%c.
+
+
+
+
+
+c = [ 1 -1 -1; 0 1 0; 0 0 1];
+
+cond(c)
+
+ans =
+
+   3.732050807568879
+
+
+
+
+
+%6.
+
+
+
+
+
+
+
+
+
+
+
+
+type hilbw
+
+function [dif condH normr] = hilbw(nmax)
+
+n = 1;
+max = 1;
+dif = zeros(n,1);
+
+while max > dif
+    max = ones(n,1);
+
+    if n <= nmax
+    
+    H = hilb(n);
+    x = ones(n,1);
+    b = H*x;
+    t = linsolve(H,b);
+    dif = x - t;
+    n = n+1;
+    n
+    condH = cond(H)
+    
+    else
+    end
+end
+
+
+r = b - H*t;
+normr = norm(r);
+
+end
+
+
+
+
+
+
+[ dif condH normr] = hilbw(20)
+
+n =
+
+     2
+
+
+condH =
+
+     1
+
+
+n =
+
+     3
+
+
+condH =
+
+  19.281470067903971
+
+
+n =
+
+     4
+
+
+condH =
+
+     5.240567775860644e+02
+
+
+n =
+
+     5
+
+
+condH =
+
+     1.551373873892924e+04
+
+
+n =
+
+     6
+
+
+condH =
+
+     4.766072502433796e+05
+
+
+n =
+
+     7
+
+
+condH =
+
+     1.495105864148109e+07
+
+
+n =
+
+     8
+
+
+condH =
+
+     4.753673562966472e+08
+
+
+n =
+
+     9
+
+
+condH =
+
+     1.525757555001589e+10
+
+
+n =
+
+    10
+
+
+condH =
+
+     4.931541097528780e+11
+
+
+n =
+
+    11
+
+
+condH =
+
+     1.602492277132444e+13
+
+
+n =
+
+    12
+
+
+condH =
+
+     5.225996710750758e+14
+
+{Warning: Matrix is close to singular or badly
+scaled. Results may be inaccurate. RCOND =
+2.574701e-17.} 
+{> In <a href="matlab: opentoline('/Users/spritelikepuck/Documents/MATLAB/hilbw.m',15,1)">hilbw at 15</a>} 
+
+n =
+
+    13
+
+
+condH =
+
+     1.677559200768562e+16
+
+{Warning: Matrix is close to singular or badly
+scaled. Results may be inaccurate. RCOND =
+1.626362e-18.} 
+{> In <a href="matlab: opentoline('/Users/spritelikepuck/Documents/MATLAB/hilbw.m',15,1)">hilbw at 15</a>} 
+
+n =
+
+    14
+
+
+condH =
+
+     1.759036194677610e+18
+
+
+dif =
+
+  -0.000000107916354
+   0.000017005336172
+  -0.000657347705870
+   0.010964703443796
+  -0.098587984784807
+   0.535280315853418
+  -1.868858985186242
+   4.336067157664033
+  -6.755833381021115
+   6.986020907992431
+  -4.597792378084249
+   1.743135154761284
+  -0.289755158934422
+
+
+condH =
+
+     1.759036194677610e+18
+
+
+normr =
+
+     8.599750569898517e-16
+
+
+
+
+
+
+%7.
+
+
+
+
+
+
+
+
+n = 5;
+
+
+
+
+
+M = magic(n)
+
+M =
+
+    17    24     1     8    15
+    23     5     7    14    16
+     4     6    13    20    22
+    10    12    19    21     3
+    11    18    25     2     9
+
+
+ 
+
+
+R = chol(M)
+{Error using <a href="matlab:helpUtils.errorDocCallback('chol')" style="font-weight:bold">chol</a>
+Matrix must be positive definite.
+} 
+
+
+
+% A = magic(n) is not positive definite
+
+
+
+
+
+H = hilb(n);
+
+
+R = chol(H);
+
+
+
+
+%hilb(n) IS positive definite
+
+
+
+
+
+P = pascal(n)
+
+P =
+
+     1     1     1     1     1
+     1     2     3     4     5
+     1     3     6    10    15
+     1     4    10    20    35
+     1     5    15    35    70
+
+
+
+R = chol(P)
+
+R =
+
+     1     1     1     1     1
+     0     1     2     3     4
+     0     0     1     3     6
+     0     0     0     1     4
+     0     0     0     0     1
+
+
+
+
+R = rand(n);
+
+
+T = chol(R)
+{Error using <a href="matlab:helpUtils.errorDocCallback('chol')" style="font-weight:bold">chol</a>
+Matrix must be positive definite.
+} 
+
+
+%R = rand(n) is NOT positive definite
+
+
+
+
+
+
+
+R = rand(n);
+
+
+A = R'*R;
+
+
+T = chol(A);
+
+
+
+
+% matrix A, where A = R'*R, and R = rand(n)
+%IS positive definite.
+
+
+
+
+
+
+
+
+
+A = R' + R;
+
+
+
+T = chol(A)
+{Error using <a href="matlab:helpUtils.errorDocCallback('chol')" style="font-weight:bold">chol</a>
+Matrix must be positive definite.
+} 
+
+
+
+
+% matrix A, where A = R' + R, and R = rand(n)
+% is NOT postive definite
+
+
+
+
+
+
+
+I = eye(n,n);
+
+A = R' + R + n*I;
+
+
+
+T = chol(A);
+
+
+
+% matrix A, where A = R' + R + n*I, and R is a
+%random nxn matrix IS positive definite.
+
+
+
+
+
+
+
+%8.
+
+
+a)
+
+
+eye = eye(6)
+
+eye =
+
+     1     0     0     0     0     0
+     0     1     0     0     0     0
+     0     0     1     0     0     0
+     0     0     0     1     0     0
+     0     0     0     0     1     0
+     0     0     0     0     0     1
+
+ones = ones(6);
+
+ones = ones*-1;
+
+
+upones = triu(ones,1)
+
+upones =
+
+     0    -1    -1    -1    -1    -1
+     0     0    -1    -1    -1    -1
+     0     0     0    -1    -1    -1
+     0     0     0     0    -1    -1
+     0     0     0     0     0    -1
+     0     0     0     0     0     0
+
+
+tadah = upones+eye
+
+tadah =
+
+     1    -1    -1    -1    -1    -1
+     0     1    -1    -1    -1    -1
+     0     0     1    -1    -1    -1
+     0     0     0     1    -1    -1
+     0     0     0     0     1    -1
+     0     0     0     0     0     1
+
+
+
+
+
+b)
+
+
+
+
+
+
+proof = 6*2^(6-1)
+
+proof =
+
+   192
+
+
+
+
+cond(tadah,1)
+
+ans =
+
+   192
+
+
+
+
+
+
+%c.
+
+
+
+
+
+1/eps
+
+ans =
+
+   4.5036e+15
+
+
+
+
+
+
+
+
+
+
+
+type nmaxcond
+
+function [n c ] = nmaxcond(nmax)
+
+
+
+n=0;
+c = 0;
+
+while c < 1/eps
+    
+    n = n + 1;
+    
+    if n <= nmax
+        
+    one = ones(n)*-1;
+    upones = triu(one, 1);
+    eyes = eye(n);
+    A = upones + eyes;
+    c = cond(A,1);
+    
+    
+    else
+    end
+    
+end
+end
+
+
+
+
+
+[n c ] = nmaxcond(75)
+{Warning: Matrix is close to singular or badly
+scaled. Results may be inaccurate. RCOND =
+1.480297e-16.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/matfun/cond.m',47,1)">cond at 47</a>
+  In <a href="matlab: opentoline('/Users/spritelikepuck/Documents/MATLAB/nmaxcond.m',18,1)">nmaxcond at 18</a>} 
+
+n =
+
+    48
+
+
+c =
+
+   6.7554e+15
+
+
+
+
+

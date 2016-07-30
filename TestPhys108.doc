@@ -1,0 +1,204 @@
+Jacques de Beer            Due: Oct 15, 2012                       Test 1
+                                                                   Phys108
+
+1)  
+
+
+%note: this function is called 'recta'  to avoid confusion;
+       'rectangle' is already a function in Matlab, at least it is in 
+       my version
+
+
+
+
+type recta
+
+function rectvect = recta(nodes)
+
+%this is a function that receives an input array, nodes, the x and y 
+%coordinates of four points. the coordinates of the points should are 
+%identified in clockwise order, starting from the upper left point
+
+
+%if the vectors entered form a square, the function identifies them as
+%rectangular all the same
+
+top = (nodes(1,1) - nodes(1,2));
+bottom = (nodes(1,3) - nodes(1,4));
+left = (nodes(2,1) - nodes(2,3));
+right = (nodes(2,2) - nodes(2,4));
+
+lowleftang = abs(atand(right/bottom) + atand(top/left));
+
+if (top ~= bottom) && (left ~= right)
+    fprintf('Sorry, the coordinates you entered do not form a rectangle \n')
+    
+elseif lowleftang ~= 90
+    fprintf('Sorry, the coordinates you entered do not form a rectangle \n')
+        
+else
+    fprintf('The coordinates you entered form a rectangle. \n')
+    
+end
+end
+
+
+recta([ 1 2 1 2; 2 2 1 1])
+The coordinates you entered form a rectangle. 
+recta([ 1 2 1 3; 2 2 1 1])
+Sorry, the coordinates you entered do not form a rectangle 
+
+
+
+
+2)
+
+
+
+type date
+
+function inputdate = date(month, day, year)
+
+%This is a function that receives three integers and ascertains whether
+%these integers constitute a legitimate date
+
+%In either case the function returns a string
+
+%if integers are not entered, matlab will issue an error message
+
+datevec = [month day year];
+truevec = ((datevec == int32(datevec)) == [1 1 1]);
+
+%this function accounts for days with 31, 30 and 28 days.  It does not,
+%however, account for leap years.
+
+if (month == 2) && (day > 28)
+    
+    fprintf('Sorry, %.0f/%.0f/%.0f is not a legtimate date. \n', month, day, year)
+    
+elseif ((month == 4 ) || (month == 6 ) || (month == 9 ) || (month == 11 )) && (day > 30)
+    
+    fprintf('Sorry, %.0f/%.0f/%.0f is not a legtimate date. \n', month, day, year)
+    
+elseif  (0 < month) && (month < 13) && (true(truevec)) && (year < 2013) &&  (0 < day) && (day < 32)
+                
+    fprintf('%.0f/%.0f/%.0f is a legtimate date. \n', month, day, year)
+    
+else
+        
+    fprintf('Sorry, %.0f/%.0f/%.0f is not a legtimate date. \n', month, day, year)
+    
+end
+end
+
+
+
+date(2,28,1992)
+2/28/1992 is a legtimate date. 
+date(2,29,1992)
+Sorry, 2/29/1992 is not a legtimate date. 
+date(4,30,1992)
+4/30/1992 is a legtimate date. 
+date(4,31,1992)
+Sorry, 4/31/1992 is not a legtimate date. 
+date(6,31,1992)
+Sorry, 6/31/1992 is not a legtimate date. 
+date(6,30,1992)
+6/30/1992 is a legtimate date. 
+date(2.3,28,1992)
+{Operands to the || and && operators must be convertible to logical
+scalar values.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('date', '/Users/spritelikepuck/Documents/MATLAB/date.m', 24)" style="font-weight:bold">date</a> (<a href="matlab: opentoline('/Users/spritelikepuck/Documents/MATLAB/date.m',24,0)">line 24</a>)
+elseif  (0 < month) && (month < 13) && (true(truevec)) && (year < 2013)
+&&  (0 < day) && (day < 32)
+} 
+
+
+
+
+5)
+
+
+
+
+type number_of_digits
+
+function integer = number_of_digits(n)
+
+
+% this function accepts a non-negative integer and determines the number of
+% digits that constitute the integer with a while loop
+
+i = 1;
+
+if (int32(n) ~= n) || (n < 0)
+    
+    fprintf('%f is not a non-negative integer; this function only accepts non-negative integers. \n', n)
+    
+else
+    
+    while (10^i - n) < 0 || n == 10^i
+       
+        i = i + 1;
+        
+    end
+    
+    fprintf('The integer %.0f has %.0f digits. \n',n,i)
+    
+end
+end
+
+
+number_of_digits(1)
+The integer 1 has 1 digits. 
+number_of_digits(9)
+The integer 9 has 1 digits. 
+number_of_digits(10)
+The integer 10 has 2 digits. 
+number_of_digits(19)
+The integer 19 has 2 digits. 
+number_of_digits(100)
+The integer 100 has 3 digits. 
+number_of_digits(1000)
+The integer 1000 has 4 digits. 
+
+
+
+
+'
+
+7)
+
+
+type ordered
+
+function order = ordered(x)
+
+%this function accepts an integer vector x and ascertains if the vector
+%elements are in ascending or descending order.
+
+
+
+if x == sort(x)
+    
+    disp('The vector entered is in ascending order.')
+    
+elseif  x == sort(x,'descend')
+    
+    disp('The vector entered is in descending order.')
+    
+else
+    disp('This vector is not ordered.') 
+  
+end
+end
+
+
+ordered ([1 3 5 9])
+The vector entered is in ascending order.
+ordered ([1 3 4 3 2])
+This vector is not ordered.
+ordered ([9 7 5 3])
+The vector entered is in descending order.
+

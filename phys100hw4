@@ -1,0 +1,417 @@
+Andre-Jacques de Beer       Phys100   Assignment 4
+
+
+
+
+
+syms z
+A = [z -1 0 0 0; -1 z -1 0 0; 0 -2 z -1 0; 0 0 -1 z -1; 0 0 0 -1 z];
+det(A)
+ 
+ans =
+ 
+z^5 - 5*z^3 + 4*z
+ 
+%the determinant is non-zero for non-trivial values of z, eg z=0
+
+
+A2 = A(2)
+ 
+A2 =
+ 
+-1
+ 
+A2 = A(1:2,1:2)
+ 
+A2 =
+ 
+[  z, -1]
+[ -1,  z]
+ 
+det(A)
+ 
+ans =
+ 
+z^5 - 5*z^3 + 4*z
+ 
+
+
+
+det(A2)
+ 
+ans =
+ 
+z^2 - 1
+ 
+%A2 is nonsingularwhen z is not equal to 1 or -1.
+
+
+
+%OHHHHHH  I though you meant I was determine if the matrix was singular or 
+%nonsingular for different dimensions, n.
+
+%Ok, so what I'll do is find the roots to the determinant of A, and I know 
+%they'll include 0 and exclude 2 and 5.
+
+
+
+
+
+
+zee = [1 0 -5 0 4 0];
+
+roots(zee)
+
+ans =
+
+         0
+   -2.0000
+   -1.0000
+    2.0000
+    1.0000
+
+z = 2
+
+z =
+
+     2
+
+A
+ 
+A =
+ 
+[  z, -1,  0,  0,  0]
+[ -1,  z, -1,  0,  0]
+[  0, -2,  z, -1,  0]
+[  0,  0, -1,  z, -1]
+[  0,  0,  0, -1,  z]
+ 
+A(z = 2)
+ A(z = 2)
+    |
+{Error: The expression to the left of the equals sign is
+not a valid target for an assignment.
+} 
+clear zee
+clear z
+z = 2
+
+z =
+
+     2
+
+A
+ 
+A =
+ 
+[  z, -1,  0,  0,  0]
+[ -1,  z, -1,  0,  0]
+[  0, -2,  z, -1,  0]
+[  0,  0, -1,  z, -1]
+[  0,  0,  0, -1,  z]
+ 
+A = [z -1 0 0 0; -1 z -1 0 0; 0 -2 z -1 0; 0 0 -1 z -1; 0 0 0 -1 z];
+A
+
+A =
+
+     2    -1     0     0     0
+    -1     2    -1     0     0
+     0    -2     2    -1     0
+     0     0    -1     2    -1
+     0     0     0    -1     2
+
+det(A)
+
+ans =
+
+     0
+
+%just as i thought, the matrix is singlar when z is 2 and 0, and not when 
+%it is 5.  It is also singular at -1, -2, and 1.
+
+
+
+
+
+
+
+
+
+%2
+
+
+
+
+
+n = 100;
+
+B = [1:1:n];
+
+D = 2*ones(1,100);
+
+supsubD = -1*ones(1,99);
+
+
+clear A
+
+A = diag(D) + diag(supsubD,+1) + diag(supsubD,-1);
+
+
+
+X = (A^-1)*B';
+
+
+
+condest(A)
+
+ans =
+
+   5.1000e+03
+
+
+
+
+
+
+
+
+%3
+
+
+
+
+
+
+
+
+
+clc
+clear
+
+
+
+D = ones(1,10);
+
+A = diag(D);
+
+
+cond(A)
+
+ans =
+
+     1
+
+
+
+%a)
+
+
+c = 13;  parta = c*A;
+
+cond(parta)
+
+ans =
+
+     1
+
+
+
+%cA will have the same properties
+
+
+%b)
+
+
+
+partb = A^2;
+
+
+%this is the same matrix as the original, so this is also true.
+
+
+
+
+
+
+
+%but for good measure, let me try another diagonal matrix
+
+
+partb2 = diag([1:1:10]);
+
+partb22 = partb2*A;
+
+cond(partb22)
+
+ans =
+
+    10
+
+cond(partb2)
+
+ans =
+
+    10
+
+det(partb2)
+
+ans =
+
+     3628800
+
+
+
+%Ah, so part B does not ALWAYS necessarily hold..
+
+
+
+%c)
+
+
+
+
+%if part b) isn't true, neither can be part c...
+
+
+
+%d)
+
+
+
+
+
+invA = A^-1
+
+invA =
+
+  Columns 1 through 9
+
+     1     0     0     0     0     0     0     0     0
+     0     1     0     0     0     0     0     0     0
+     0     0     1     0     0     0     0     0     0
+     0     0     0     1     0     0     0     0     0
+     0     0     0     0     1     0     0     0     0
+     0     0     0     0     0     1     0     0     0
+     0     0     0     0     0     0     1     0     0
+     0     0     0     0     0     0     0     1     0
+     0     0     0     0     0     0     0     0     1
+     0     0     0     0     0     0     0     0     0
+
+  Column 10
+
+     0
+     0
+     0
+     0
+     0
+     0
+     0
+     0
+     0
+     1
+
+%this inverse of A will have the same property.
+
+
+%e)
+
+
+transpA = A';
+
+cond(transpA)
+
+ans =
+
+     1
+
+
+%the transpose of A also maintains the same property of perfect 
+%conditioning
+
+
+
+
+
+
+%now, trying it again with a matrix that's not just the identity matrix, 
+%though it is very revealing
+
+
+F = hadamard(4)
+
+F =
+
+     1     1     1     1
+     1    -1     1    -1
+     1     1    -1    -1
+     1    -1    -1     1
+
+cond(F)
+
+ans =
+
+    1.0000
+
+cond(F')
+
+ans =
+
+    1.0000
+
+cond(F^-1)
+
+ans =
+
+    1.0000
+
+
+cond(F*diag(ones(1,4)))
+
+ans =
+
+    1.0000
+
+
+%ok, all good..
+
+
+
+
+
+%4)
+
+
+
+
+clear
+clc
+
+
+fours = -4*ones(1,9); subsup3= ones(1,6); subsup1 = [1 1 0 1 1 0 1 1];
+
+A = diag(fours) + diag(subsup3,+3) + diag(subsup3,-3) + diag(subsup1,+1) 
+ + diag(subsup1,-1);
+
+
+B = 100 * [0 0 1 0 0 1 2 2 3];
+
+
+X = (A^-1)*B'
+
+X =
+
+  -21.4286
+  -38.3929
+  -57.1429
+  -47.3214
+  -75.0000
+  -90.1786
+  -92.8571
+ -124.1071
+ -128.5714
+
+
+
+
+

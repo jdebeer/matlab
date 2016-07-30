@@ -1,0 +1,288 @@
+Andre-Jacques de Beer                                           Homework 7
+Phys 108
+
+1) a)
+
+
+syms x
+
+
+y = sqrt(((x-1)*(x-2))/((x-3)*(x-4)))
+ 
+y =
+ 
+(((x - 1)*(x - 2))/((x - 3)*(x - 4)))^(1/2)
+ 
+
+diff(y,x)
+ 
+ans =
+ 
+((x - 1)/((x - 3)*(x - 4)) + (x - 2)/((x - 3)*(x - 4)) - ((x - 1)*(x - 2))/((x - 3)*(x - 4)^2) - ((x - 1)*(x - 2))/((x - 3)^2*(x - 4)))/(2*(((x - 1)*(x - 2))/((x - 3)*(x - 4)))^(1/2))
+ 
+
+
+diary off
+
+
+b)
+
+
+syms x n a
+
+syms n positive
+
+y = -(1/(n*a))*log(((x^n)+a)/(x^n))
+ 
+y =
+ 
+-log((a + x^n)/x^n)/(a*n)
+ 
+
+
+
+diff(y,x)
+ 
+ans =
+ 
+-(x^n*((n*x^(n - 1))/x^n - (n*(a + x^n))/x^(n + 1)))/(a*n*(a + x^n))
+ 
+
+
+
+
+
+2) a)
+
+
+y = 1/(3+(2*(x)^2))
+ 
+y =
+ 
+1/(2*x^2 + 3)
+ 
+int(y,1,3)
+ 
+ans =
+ 
+-(6^(1/2)*(atan(6^(1/2)/3) - atan(6^(1/2))))/6
+ 
+
+
+
+
+b)
+
+
+
+
+
+y = cos(x)/sqrt(x)
+ 
+y =
+ 
+cos(x)/x^(1/2)
+ 
+
+
+int(y,0,inf)
+ 
+ans =
+ 
+(2^(1/2)*pi^(1/2))/2
+ 
+
+
+
+c)
+
+
+
+y = (1+x^2)/(1+x^4)
+ 
+y =
+ 
+(x^2 + 1)/(x^4 + 1)
+ 
+
+int(y,0,1)
+ 
+ans =
+ 
+(2^(1/2)*(atan(2^(1/2)*(1/2 - i/2)) + atan(2^(1/2)*(1/2 + i/2))))/2
+ 
+
+
+
+
+
+d)
+
+
+
+syms a x b
+y = cos(b*x)/(1+x^2)
+ 
+y =
+ 
+cos(b*x)/(x^2 + 1)
+ 
+int(y,0,inf)
+{Warning: Explicit integral could not be found.} 
+ 
+ans =
+ 
+piecewise([0 < b, (pi*exp(-b))/2], [b < 0, (pi*exp(b))/2], [b ~= 0 and b in R_, -(pi*sign(b)*(sinh(b) - cosh(b)*sign(b)))/2], [b == 0 or not b in R_, int(cos(x*b)/(x^2 + 1), x == 0..Inf)])
+ 
+f = pi*exp(-b)/2;
+aa = linspace(1,2,100);
+subs(f,b,aa)
+
+ans =
+
+  Columns 1 through 6
+
+    0.5779    0.5721    0.5663    0.5606    0.5550    0.5494
+
+  Columns 7 through 12
+
+    0.5439    0.5384    0.5330    0.5276    0.5223    0.5171
+
+  Columns 13 through 18
+
+    0.5119    0.5068    0.5017    0.4966    0.4916    0.4867
+
+  Columns 19 through 24
+
+    0.4818    0.4770    0.4722    0.4674    0.4627    0.4581
+
+  Columns 25 through 30
+
+    0.4535    0.4489    0.4444    0.4399    0.4355    0.4311
+
+  Columns 31 through 36
+
+    0.4268    0.4225    0.4183    0.4141    0.4099    0.4058
+
+  Columns 37 through 42
+
+    0.4017    0.3977    0.3937    0.3897    0.3858    0.3819
+
+  Columns 43 through 48
+
+    0.3781    0.3743    0.3705    0.3668    0.3631    0.3595
+
+  Columns 49 through 54
+
+    0.3558    0.3523    0.3487    0.3452    0.3418    0.3383
+
+  Columns 55 through 60
+
+    0.3349    0.3316    0.3282    0.3249    0.3217    0.3184
+
+  Columns 61 through 66
+
+    0.3152    0.3121    0.3089    0.3058    0.3027    0.2997
+
+  Columns 67 through 72
+
+    0.2967    0.2937    0.2908    0.2878    0.2849    0.2821
+
+  Columns 73 through 78
+
+    0.2792    0.2764    0.2737    0.2709    0.2682    0.2655
+
+  Columns 79 through 84
+
+    0.2628    0.2602    0.2576    0.2550    0.2524    0.2499
+
+  Columns 85 through 90
+
+    0.2474    0.2449    0.2424    0.2400    0.2376    0.2352
+
+  Columns 91 through 96
+
+    0.2328    0.2305    0.2282    0.2259    0.2236    0.2213
+
+  Columns 97 through 100
+
+    0.2191    0.2169    0.2147    0.2126
+
+
+
+
+3) a)
+
+
+
+
+
+
+
+clear
+syms t
+f = sin(t)/t
+ 
+f =
+ 
+sin(t)/t
+ 
+int(f,0,x)
+{Undefined function or variable 'x'.
+} 
+syms x
+int(f,0,x)
+ 
+ans =
+ 
+sinint(x)
+ 
+taylor(ans,10)
+{Warning: The syntax of TAYLOR has changed. The old syntax is
+partially supported in this release, but will be removed in a future
+release. Second argument must be a variable. See doc taylor for
+details.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/symbolic/symbolic/@sym/taylor.m',97,1)">sym.taylor at 97</a>} 
+ 
+ans =
+ 
+x^9/3265920 - x^7/35280 + x^5/600 - x^3/18 + x
+ 
+hig = int(f,0,x)
+ 
+hig =
+ 
+sinint(x)
+ 
+don = taylor(ans,10)
+{Warning: The syntax of TAYLOR has changed. The old syntax is
+partially supported in this release, but will be removed in a future
+release. Second argument must be a variable. See doc taylor for
+details.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/symbolic/symbolic/@sym/taylor.m',97,1)">sym.taylor at 97</a>} 
+ 
+don =
+ 
+x^9/3265920 - x^7/35280 + x^5/600 - x^3/18 + x
+ 
+linspace(0,10,500);
+james = linspace(0,10,500);
+jammin = subs(hig,x,james);
+rockin = subs(don,x,james);
+plot(james, hig, 'b', james, don, 'r')
+{Error using <a href="matlab:helpUtils.errorDocCallback('plot')" style="font-weight:bold">plot</a>
+Conversion to double from sym is not possible.
+} 
+hig = matlabfunction(hig)
+{Undefined function 'matlabfunction' for input arguments of type
+'sym'.
+} 
+hig = matlabFunction(hig)
+{Warning: Function "Si" is not verified to be a valid MATLAB function.} 
+
+hig = 
+
+    @(x)Si(x)
+
+clear
+clc

@@ -1,0 +1,716 @@
+syms x
+f = cos(x) + 1/(1+exp(-2*x))
+ 
+f =
+ 
+cos(x) + 1/(exp(-2*x) + 1)
+ 
+ezplot(f,[2,4]); grid on
+ezplot(f,[3,3.25]); grid on
+f = matlabFunction(f)
+
+f = 
+
+    @(x)cos(x)+1.0./(exp(x.*-2.0)+1.0)
+
+bisect(f,3.05,3.1,10e-7)
+
+ans =
+
+    3.0764
+
+diary off
+
+
+syms M e E
+
+
+M = E - e*sin(E)
+ 
+M =
+ 
+E - e*sin(E)
+ 
+ezplot(M)
+solve([M=1,e=0.5],E)
+ solve([M=1,e=0.5],E)
+        |
+{Error: The expression to the left of the equals sign is not a valid target for an
+assignment.
+} 
+e = (M - E)/(-sin(E));
+M = 1
+
+M =
+
+     1
+
+e = 0.5
+
+e =
+
+    0.5000
+
+solve(e = (M - E)/(-sin(E)), e)
+ solve(e = (M - E)/(-sin(E)), e)
+        |
+{Error: The expression to the left of the equals sign is not a valid target for an
+assignment.
+} 
+solve(e == (M - E)/(-sin(E)), e)
+ 
+ans =
+ 
+1.4987011335178483140579854972562
+ 
+solve(e == (M - E)/(-sin(E)), E)
+ 
+ans =
+ 
+1.4987011335178483140579854972562
+ 
+solve(e == (M - E)/(-sin(E)))
+ 
+ans =
+ 
+1.4987011335178483140579854972562
+ 
+diary off
+
+
+syms e E M
+
+M = E - e*sin(E)
+ 
+M =
+ 
+E - e*sin(E)
+ 
+ezplot(M)
+ezplot(M); grid on;
+
+
+clear
+diary off
+
+
+
+
+
+clear
+syms e E M
+
+M = E - e*sin(E);
+
+
+M = 1;  e = 0.5;
+
+solve(M)
+{Warning: List of equations is empty.} 
+{> In <a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/symbolic/symbolic/solve.m',153,1)">solve at 153</a>} 
+ 
+ans =
+ 
+[ empty sym ]
+ 
+solve(M = E - e*sin(E), E)
+ solve(M = E - e*sin(E), E)
+        |
+{Error: The expression to the left of the equals sign is not a valid target for an
+assignment.
+} 
+solve(M == E - e*sin(E), E)
+ 
+ans =
+ 
+1.4987011335178483140579854972562
+ 
+
+
+
+
+diary off
+
+
+
+
+3) 17.
+
+
+
+
+
+
+
+syms x
+
+g = tan(x)*tanh(x) == -1;
+
+
+
+ezplot(g); grid on;
+{Error using <a href="matlab:helpUtils.errorDocCallback('sym/ezplot>fhandle', '/Applications/MATLAB_R2012a.app/toolbox/symbolic/symbolic/@sym/ezplot.m', 98)" style="font-weight:bold">sym/ezplot>fhandle</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/symbolic/symbolic/@sym/ezplot.m',98,0)">line 98</a>)
+Plotting an equation requires exactly 2 unknowns.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('sym/ezplot', '/Applications/MATLAB_R2012a.app/toolbox/symbolic/symbolic/@sym/ezplot.m', 46)" style="font-weight:bold">sym/ezplot</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/symbolic/symbolic/@sym/ezplot.m',46,0)">line 46</a>)
+   h = ezplot(fhandle(f));
+} 
+
+g = tan(x)*tanh(x)
+ 
+g =
+ 
+tan(x)*tanh(x)
+ 
+ezplot(g); grid on;
+
+
+
+
+
+
+
+g = tan(x)*tanh(x) + 1
+ 
+g =
+ 
+tan(x)*tanh(x) + 1
+ 
+
+
+
+ezplot(g); grid on;
+
+
+roots(g)
+{Undefined function 'isfinite' for input arguments of type 'sym'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('roots', '/Applications/MATLAB_R2012a.app/toolbox/matlab/polyfun/roots.m', 27)" style="font-weight:bold">roots</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/polyfun/roots.m',27,0)">line 27</a>)
+if ~all(isfinite(c))
+} 
+g = matlabFunction(g)
+
+g = 
+
+    @(x)tan(x).*tanh(x)+1.0
+
+
+roots(g)
+{Undefined function 'isfinite' for input arguments of type 'function_handle'.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('roots', '/Applications/MATLAB_R2012a.app/toolbox/matlab/polyfun/roots.m', 27)" style="font-weight:bold">roots</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/polyfun/roots.m',27,0)">line 27</a>)
+if ~all(isfinite(c))
+} 
+ezplot(g,[1,3]); grid on;
+ezplot(g,[2.2,2.6]); grid on;
+
+
+
+bisect(g,2.3,2.4,10e-7)
+
+ans =
+
+    2.3470
+
+form long
+{Undefined function 'form' for input arguments of type 'char'.
+} 
+format long
+
+
+
+bisect(g,2.3,2.4,10e-7)
+
+ans =
+
+   2.347045516967773
+
+diary off
+
+
+
+
+
+
+
+
+4. 20)
+
+
+
+
+
+
+syms x
+
+g = sin(x)/x
+ 
+g =
+ 
+sin(x)/x
+ 
+ezplot(g,[-10,10])
+ezplot(g,[-10,10]); grid on;
+
+
+dg = diff(g);
+
+
+f = matlabFunction(g)
+
+f = 
+
+    @(x)sin(x)./x
+
+
+df = matlabFunction(dg);
+
+
+newton(f,df,-9.35,10e-7)
+k =  1 x = -9.42432214061460e+00 
+k =  2 x = -9.42477793875565e+00 
+k =  3 x = -9.42477796076938e+00 
+
+ans =
+
+  -9.424777960769379
+
+
+
+ezplot(g,[-10,10]); grid on;
+
+
+
+
+
+
+
+
+
+
+
+newton(f,df,-6.35,10e-7)
+k =  1 x = -6.28237307332398e+00 
+k =  2 x = -6.28318520235985e+00 
+k =  3 x = -6.28318530717958e+00 
+
+ans =
+
+  -6.283185307179584
+
+newton(f,df,-3.1,10e-7)
+k =  1 x = -3.14106536328268e+00 
+k =  2 x = -3.14159256513733e+00 
+k =  3 x = -3.14159265358979e+00 
+
+ans =
+
+  -3.141592653589791
+
+newton(f,df,3.0,10e-7)
+k =  1 x = +3.13608060321821e+00 
+k =  2 x = +3.14158303810485e+00 
+k =  3 x = +3.14159265356036e+00 
+k =  4 x = +3.14159265358979e+00 
+
+ans =
+
+   3.141592653589793
+
+newton(f,df,6.3,10e-7)
+k =  1 x = +6.28313871531446e+00 
+k =  2 x = +6.28318530683413e+00 
+k =  3 x = +6.28318530717959e+00 
+
+ans =
+
+   6.283185307179586
+
+newton(f,df,9.35,10e-7)
+k =  1 x = +9.42432214061460e+00 
+k =  2 x = +9.42477793875565e+00 
+k =  3 x = +9.42477796076938e+00 
+
+ans =
+
+   9.424777960769379
+
+
+
+
+
+
+
+5. 21)
+
+
+
+
+
+clear
+
+
+syms a x
+
+
+f = a*cosh(x/4) - x;
+
+
+df = diff(f);
+
+
+solve(df == 0, x)
+ 
+ans =
+ 
+4*asinh(4/a)
+ 
+x = solve(df == 0, x)
+ 
+x =
+ 
+4*asinh(4/a)
+ 
+x
+ 
+x =
+ 
+4*asinh(4/a)
+ 
+f = a*cosh(4*asinh(4/a)/4) - 4*asinh(4/a);
+
+solve(f==0,a)
+ 
+ans =
+ 
+-2.650973677396726323898968388437
+ 
+
+
+
+
+6. 28)
+
+
+
+
+c = [64 0 -80 0 24 -1];
+roots(c)
+
+ans =
+
+ -0.796424413408094 + 0.039729420215883i
+ -0.796424413408094 - 0.039729420215883i
+  0.898174755191665                     
+  0.652762343669371                     
+  0.041911727955153                     
+
+n = length(c);
+A = diag(ones(n-2,1), -1);
+A(1,:) = -c(2:n) ./c(1);
+eig(A)
+
+ans =
+
+ -0.796424413408094 + 0.039729420215883i
+ -0.796424413408094 - 0.039729420215883i
+  0.898174755191665                     
+  0.652762343669371                     
+  0.041911727955153                     
+
+condeig(A)
+
+ans =
+
+  14.409841012089581
+  14.409841012089583
+   4.494495881795367
+   6.437706172566505
+   4.465176842043852
+
+%not bad
+
+
+
+
+
+
+
+
+a = [128 -3 -1300 4 3300 2 -1700 3];  roots(a)
+
+ans =
+
+   2.569759061935571
+  -2.532474956492323
+  -1.725418825421461
+   1.714354662450036
+  -0.832894671365769
+   0.828347508679543
+   0.001764720214407
+
+                  
+
+
+
+
+
+
+p = [1 0 0 0 0 0 -1 ]
+
+p =
+
+     1     0     0     0     0     0    -1
+
+roots(p)
+
+ans =
+
+ -1.000000000000000                     
+ -0.500000000000000 + 0.866025403784439i
+ -0.500000000000000 - 0.866025403784439i
+  0.500000000000000 + 0.866025403784438i
+  0.500000000000000 - 0.866025403784438i
+  1.000000000000000                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+d = [1 1 4 2 0 4 ];  roots(d)
+
+ans =
+
+ -0.358661807895043 + 1.962107362095425i
+ -0.358661807895043 - 1.962107362095425i
+ -1.170868279650769                     
+  0.444095947720427 + 0.813302199051096i
+  0.444095947720427 - 0.813302199051096i
+
+
+
+
+
+7. 29)
+
+
+
+
+
+
+
+
+type cheb
+
+function [Tmplus1 T] = cheb(n)
+
+m = n-1;
+
+syms x
+
+
+Tmplus1 = x;
+Tm = 1;
+T = Tmplus1;
+
+if m > 0
+    
+for i = 1:m
+    Tmless1 = Tm;
+    Tm = Tmplus1;
+    Tmplus1 = 2*x*Tm - Tmless1;
+    T = T*Tmplus1;
+    
+end
+elseif m == 0
+    T = Tmplus1;
+
+
+else
+end
+
+T
+
+
+end
+
+
+
+
+
+
+
+
+cheb(1)
+ 
+T =
+ 
+x
+ 
+ 
+ans =
+ 
+x
+ 
+
+
+
+cheb(2)
+ 
+T =
+ 
+x*(2*x^2 - 1)
+ 
+ 
+ans =
+ 
+2*x^2 - 1
+ 
+
+
+
+
+cheb(3)
+ 
+T =
+ 
+-x*(x - 2*x*(2*x^2 - 1))*(2*x^2 - 1)
+ 
+ 
+ans =
+ 
+2*x*(2*x^2 - 1) - x
+ 
+
+
+
+
+cheb(4)
+ 
+T =
+ 
+x*(x - 2*x*(2*x^2 - 1))*(2*x^2 - 1)*(2*x*(x - 2*x*(2*x^2 - 1)) + 2*x^2 - 1)
+ 
+ 
+ans =
+ 
+1 - 2*x^2 - 2*x*(x - 2*x*(2*x^2 - 1))
+ 
+
+
+
+syms x
+
+f = cheb(4); expand(f)
+ 
+T =
+ 
+x*(x - 2*x*(2*x^2 - 1))*(2*x^2 - 1)*(2*x*(x - 2*x*(2*x^2 - 1)) + 2*x^2 - 1)
+ 
+ 
+ans =
+ 
+8*x^4 - 8*x^2 + 1
+ 
+
+
+
+
+
+
+
+c = [8 0 -2 0 1]
+
+c =
+
+     8     0    -2     0     1
+
+
+
+
+roots(c)
+
+ans =
+
+ -0.489159171739258 + 0.338048362363489i
+ -0.489159171739258 - 0.338048362363489i
+  0.489159171739258 + 0.338048362363489i
+  0.489159171739258 - 0.338048362363489i
+
+
+
+
+
+
+8. 37)
+
+
+
+
+a = [1 -5 6 -1]
+
+a =
+
+     1    -5     6    -1
+
+
+
+
+
+roots(a)
+
+ans =
+
+   3.246979603717463
+   1.554958132087372
+   0.198062264195162
+
+
+
+
+
+9. final question)
+
+
+
+
+b = [1 -23 207 -977 2656 -4200 3600 -1296]
+
+b =
+
+  Columns 1 through 3
+
+           1         -23         207
+
+  Columns 4 through 6
+
+        -977        2656       -4200
+
+  Columns 7 through 8
+
+        3600       -1296
+
+roots(b)
+
+ans =
+
+  9.000000000000011                     
+  3.000002208631843                     
+  2.999997791353523                     
+  2.001125396505790                     
+  1.999998987247328 + 0.001124380337931i
+  1.999998987247328 - 0.001124380337931i
+  1.998876629014173                     
+
+
+
+
+

@@ -1,0 +1,139 @@
+
+
+
+
+
+%Restart
+clear; a = 1.5e-18; b = 2.5e-6; g = 2.1e-6;
+p = 0.6; o = 0.18; tt = 0.016;
+dn_dt = @(t,n) [(-n(1).*(a.*n(2) + b) + g); (n(2).*(p.*n(1) - o) + tt.*(1+n(1)))];
+[t,n] = ode45(dn_dt,[0 1000000],[-1;0]);
+
+
+
+
+subplot(2,1,1), plot(t, n(:, 1), ':', t, n(:, 2))
+
+
+
+subplot(2,1,1), plot(t, n(:, 1), ':', t, n(:, 2))
+subplot(1,1,1), plot(t, n(:, 1), ':', t, n(:, 2))
+subplot(2,1,1), plot(t, n(:, 1), ':', t, n(:, 2))
+subplot(2,1,2), plot(n(:, 1), n(:, 2))
+
+
+diary off
+
+
+
+%5
+
+
+
+
+
+
+
+
+
+
+%5
+
+
+
+
+dy1_dt = @(t,y) [y(2); (-0.15*y(2)+y(1)-y(1)^3+0.3*cos(0.8*t))];
+dy2_dt = @(t,y) [y(2); (-0.15*y(2)+y(1)-y(1)^3+0.3*cos(1.0*t))];
+dy3_dt = @(t,y) [y(2); (-0.15*y(2)+y(1)-y(1)^3+0.3*cos(1.2*t))];
+dy4_dt = @(t,y) [y(2); (-0.15*y(2)+y(1)-y(1)^3+0.3*cos(1.4*t))];
+[t1,y1] = ode45(dy1_dt, [0 100], y0);
+{Undefined function or variable 'y0'.
+} 
+diffyt1 = @(t,y) [y(2); (-0.15*y(2)+y(1)-y(1)^3+0.3*cos(0.8*t))];
+diffyt2 = @(t,y) [y(2); (-0.15*y(2)+y(1)-y(1)^3+0.3*cos(1.0*t))];
+diffyt3 = @(t,y) [y(2); (-0.15*y(2)+y(1)-y(1)^3+0.3*cos(1.2*t))];
+diffyt4 = @(t,y) [y(2); (-0.15*y(2)+y(1)-y(1)^3+0.3*cos(1.4*t))];
+
+
+
+y0 = 0;
+
+
+[t1,y1] = ode45(dy1_dt, [0 100], y0);
+{Index exceeds matrix dimensions.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(t,y)[y(2);(-0.15*y(2)+y(1)-y(1)^3+0.3*cos(0.8*t))]', '', 0)" style="font-weight:bold">@(t,y)[y(2);(-0.15*y(2)+y(1)-y(1)^3+0.3*cos(0.8*t))]</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('odearguments', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/private/odearguments.m', 88)" style="font-weight:bold">odearguments</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/private/odearguments.m',88,0)">line 88</a>)
+f0 = feval(ode,t0,y0,args{:});   % ODE15I sets args{1} to yp0.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ode45', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/ode45.m', 114)" style="font-weight:bold">ode45</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/ode45.m',114,0)">line 114</a>)
+[neq, tspan, ntspan, next, t0, tfinal, tdir, y0, f0, odeArgs,
+odeFcn, ...
+} 
+[t1,y1] = ode45(diffyt1, [0 100], y0);
+{Index exceeds matrix dimensions.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('@(t,y)[y(2);(-0.15*y(2)+y(1)-y(1)^3+0.3*cos(0.8*t))]', '', 0)" style="font-weight:bold">@(t,y)[y(2);(-0.15*y(2)+y(1)-y(1)^3+0.3*cos(0.8*t))]</a>
+
+
+Error in <a href="matlab:helpUtils.errorDocCallback('odearguments', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/private/odearguments.m', 88)" style="font-weight:bold">odearguments</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/private/odearguments.m',88,0)">line 88</a>)
+f0 = feval(ode,t0,y0,args{:});   % ODE15I sets args{1} to yp0.
+
+Error in <a href="matlab:helpUtils.errorDocCallback('ode45', '/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/ode45.m', 114)" style="font-weight:bold">ode45</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2012a.app/toolbox/matlab/funfun/ode45.m',114,0)">line 114</a>)
+[neq, tspan, ntspan, next, t0, tfinal, tdir, y0, f0, odeArgs,
+odeFcn, ...
+} 
+y0 = [0;0];
+
+
+
+
+[t1,y1] = ode45(diffyt1, [0 100], y0);
+[t2,y2] = ode45(diffyt2, [0 100], y0);
+[t3,y3] = ode45(diffyt3, [0 100], y0);
+[t4,y4] = ode45(diffyt4, [0 100], y0);
+
+plot(t1, y1(:,1), 'r'); grid on
+plot(t1, y1(:,1), 'm'); grid on
+plot(t1, y2(:,1), 'm'); grid on
+{Error using <a href="matlab:helpUtils.errorDocCallback('plot')" style="font-weight:bold">plot</a>
+Vectors must be the same lengths.
+} 
+plot(t2, y2(:,1), 'm'); grid on
+plot(t1, y1(:,1), 'r'); grid on
+plot(t3, y3(:,1), 'o'); grid on
+plot(t4, y4(:,1), 'g'); grid on
+
+
+
+diary off
+
+
+
+
+
+
+
+
+%4
+
+
+
+
+
+
+
+
+
+clear; a = 1.5e-18; b = 2.5e-6; g = 2.1e-6;
+p = 0.6; o = 0.18; tt = 0.016;
+dn_dt = @(t,n) [(-n(1).*(a.*n(2) + b) + g); (n(2).*(p.*n(1) - o) + tt.*(1+n(1)))];
+[t,n] = ode45(dn_dt,[0 1000000],[-1;0]);
+plot(t,n(:,2))
+plot(t,n(:,1))
+
+
+
+diary off

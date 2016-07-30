@@ -1,0 +1,328 @@
+Andre-Jacques de Beer                                           Homework 4
+Phys 108
+
+1) 8.1
+
+exclaimcell = 
+
+    'Bravo'    'Fantastic job'    'Wow'    'Impressive work'
+
+
+disp(exclaimcell(randi([1,4])))
+    'Wow'
+
+
+2) 8.2
+
+
+ca = {'abc', 11, 3:2:9, zeros(2)}
+
+ca = 
+
+    'abc'    [11]    [1x4 double]    [2x2 double]
+
+
+
+twotwoca = reshape(ca,2,2)
+
+twotwoca = 
+
+    'abc'    [1x4 double]
+    [ 11]    [2x2 double]
+
+
+
+[onetwo twotwo ] = twotwoca{:,2}
+
+onetwo =
+
+     3     5     7     9
+
+
+twotwo =
+
+     0     0
+     0     0
+
+
+3) 8.3
+
+
+precell = cell(2,2)
+
+precell = 
+
+    []    []
+    []    []
+
+precell{1} = 'char';
+precell{2} = [1 2 3];
+precell{3} = 'char2';
+precell{4} = zeros(2);
+precell
+
+precell = 
+
+    'char'          'char2'     
+    [1x3 double]    [2x2 double]
+
+precellins = cell(1,2)
+
+precellins = 
+
+    []    []
+
+precellins{1} = ones(1,3)
+
+precellins = 
+
+    [1x3 double]    []
+
+precellins{2} = ones(2)
+
+precellins = 
+
+    [1x3 double]    [2x2 double]
+
+precellcomb = {precell(1,:); precellins; precell(2,:)}
+
+precellcomb = 
+
+    {1x2 cell}
+    {1x2 cell}
+    {1x2 cell}
+
+disp(precellcomb)
+    {1x2 cell}
+    {1x2 cell}
+    {1x2 cell}
+
+
+4) 8.5
+
+
+
+type string_store
+
+%string_store accepts strings (without quotes) and stores them in a cell 
+%array until the user enters 'done' (no quotes), and once the user enters
+%'done' displays the contents of the cell array
+
+
+i = 1;
+
+strings = input('Please enter a string (don''t worry about single quotes):','s');
+
+while strcmp(strings, 'done') == 0
+
+
+
+stringstorecell{i} = strings;
+
+strings = input('Please enter a string:','s');
+
+i = i + 1;
+
+end
+
+disp(stringstorecell)
+
+
+
+string_store
+Please enter a string (don't worry about single quotes):love
+Please enter a string:love
+Please enter a string:love
+Please enter a string:love
+Please enter a string:love
+Please enter a string:love
+Please enter a string:love
+Please enter a string:done
+    'love'    'love'    'love'    'love'    'love'    'love'    'love'
+
+
+
+5) 8.8
+
+
+type buildstr
+
+function ascstrings = buildstr(charp,num)
+
+%buildstr accepts a character and integer in the form buildstr('char',int)
+%it returns a cell array with strings of increasing length, from 1 to int
+%it builds strings with successive characters in the ASCII encoding
+
+
+if (int32(num) == num) && ischar(charp)
+           
+    charnum = double(charp);
+    ascstrings = cell(1,num);
+    ascstrings{1,1} = charp;
+   
+    for i = 2:num
+        newchar = char(charnum + i - 1 );
+        ascstrings{1,i} = [ascstrings{i-1} newchar ];
+        
+    end
+    
+else
+    fprintf('Please make sure to enter an integer and character n\')
+    
+end
+end
+        
+        
+    
+buildstr('R', 19)
+
+ans = 
+
+  Columns 1 through 7
+
+    'R'    'RS'    'RST'    'RSTU'    'RSTUV'    'RSTUVW'    'RSTUVWX'
+
+  Columns 8 through 11
+
+    'RSTUVWXY'    'RSTUVWXYZ'    'RSTUVWXYZ['    'RSTUVWXYZ[\'
+
+  Columns 12 through 14
+
+    'RSTUVWXYZ[\]'    'RSTUVWXYZ[\]^'    'RSTUVWXYZ[\]^_'
+
+  Columns 15 through 17
+
+    'RSTUVWXYZ[\]^_`'    'RSTUVWXYZ[\]^_`a'    'RSTUVWXYZ[\]^_`ab'
+
+  Columns 18 through 19
+
+    'RSTUVWXYZ[\]^_`abc'    'RSTUVWXYZ[\]^_`abcd'
+
+
+
+
+buildstr('f', 5)
+
+ans = 
+
+    'f'    'fg'    'fgh'    'fghi'    'fghij'
+
+
+
+
+
+6) 8.12
+
+
+
+studstruct = struct('Name','Jacques','Uni_ID',50169032,'GPA',3.8)
+
+studstruct = 
+
+      Name: 'Jacques'
+    Uni_ID: 50169032
+       GPA: 3.8000
+
+
+
+7) 8.15
+
+
+
+a) kit(1).sub would return
+
+ans = 
+
+      id: 33
+      wt: 11.1100
+    code: 'q'
+
+
+
+b) kit(2).lens(1) would return
+
+ans =
+
+     4
+
+
+
+c) kit(1).code would not work because code is not a field
+
+
+d) kit(2).sub.id == kit(1).sub.id would work, but it would return logical 
+false, 0:
+
+ans =
+
+     0
+
+
+e) strfind(kit(1).name,'s')
+
+ans =
+
+     2
+
+
+8) 5.20
+
+
+type elistud
+
+%elistud is a script that stores student information and ultimately
+%determines eligable students based on heights or weights;  eligable
+%students have a height or weight below the average height/weight
+
+%this script returns a list of eligable students
+
+
+subjects(3) = struct('name','Joey','sub_id',111,'height',6.7000,'weight',222.2000);
+subjects(2) = struct('name','Neel','sub_id',110,'height',5.9000,'weight',160.2000);
+subjects(1) = struct('name','Tom','sub_id',109,'height',5.1000,'weight',115.0000);
+
+avgway = 0;
+avghi = 0;
+
+for j = 1:length(subjects)
+    avgway = avgway + subjects(j).weight;
+    avghi = avghi + subjects(j).height;
+    j = j + 1;
+end
+
+
+avheight = avghi/length(subjects);
+avweight = avgway/length(subjects);
+
+
+for i = 1:length(subjects)
+    
+    if (subjects(i).height < avheight) || (subjects(i).weight < avweight)
+        disp(subjects(i).name)
+    end
+end
+        
+        
+        
+elistud
+Tom
+Neel
+
+
+
+9) 8.22
+
+
+
+
+neststruct = struct('name','Jacques','address',struct('street',...
+'1050 North Mills','city','Claremont','State','CA','Country','USA'),...
+'phone_num',struct('home',8459015555,'work',8459015555))
+
+neststruct = 
+
+         name: 'Jacques'
+      address: [1x1 struct]
+    phone_num: [1x1 struct]
+
+

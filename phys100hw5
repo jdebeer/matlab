@@ -1,0 +1,1519 @@
+Andre-Jacques de Beer     Phys100hw5
+
+
+
+1)
+
+
+
+
+F = @(x) [(sin(x(1)) + x(2)^2 + log(x(3)) -3); (3*x(1) + 2^x(2) - x(3)^3); (x(1)^2 + x(2)^2 + x(3)^3 -6)];
+
+
+clear
+
+
+F = @(x) [(sin(x(1)) + x(2)^2 + log(x(3)) -3); (3*x(1) + 2^x(2) - x(3)^3); (x(1)^2 + x(2)^2 + x(3)^3 -6)];
+
+
+[x, fval, flag, output] = fsolve(F, [1;1;1]);
+
+<a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'eqn_solved','CSHelpWindow');">Equation solved</a>.
+
+fsolve completed because the vector of function values is near zero
+as measured by the default value of the <a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'fcn_tolerance_fsolve','CSHelpWindow');">function tolerance</a>, and
+the <a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'appears_regular','CSHelpWindow');">problem appears regular</a> as measured by the gradient.
+
+<<a href = "matlab: createExitMsg('trustnleqn',1.000000e+00,true,true,'fsolve',1.113658e-12,'default',1.000000e-06,1.427957e-26,'default',1.000000e-03,1.427957e-26,'default',1.000000e-03);">stopping criteria details</a>>
+
+
+
+x
+
+x =
+
+    0.2423
+    1.5272
+    1.5339
+
+
+
+
+fval
+
+fval =
+
+   1.0e-12 *
+
+    0.0013
+   -0.0484
+    0.1092
+
+
+
+flag
+
+flag =
+
+     1
+
+
+% could be more on point..
+
+
+
+
+opt = optimset('Tolfun', 1.0e-12, 'TolX', 1.0e-12, 'Display', 'off');
+
+[x, fval, flag, output] = fsolve(F, [1;1;1], opt);
+
+x
+
+x =
+
+    0.2423
+    1.5272
+    1.5339
+
+
+
+fval
+
+fval =
+
+   1.0e-14 *
+
+    0.0444
+   -0.0888
+    0.1776
+
+
+
+%ok, that's better...
+
+
+
+[x, fval, flag, output] = fsolve(F, [10;10;10], opt);
+
+x
+
+x =
+
+    0.2423
+    1.5272
+    1.5339
+
+
+fval
+
+fval =
+
+     0
+     0
+     0
+
+
+flag
+
+flag =
+
+     1
+
+
+%%% ok, doesn't get better than that
+
+
+%%% on to the second:
+
+
+
+[x, fval, flag, output] = fsolve(F, [-1;-1;-1], opt);
+
+x
+
+x =
+
+  -0.0610 + 0.0000i
+  -2.4487 - 0.0000i
+   0.0531 + 0.0000i
+
+fval
+
+fval =
+
+   1.0e-14 *
+
+        0 + 0.0145i
+  -0.0012 + 0.0000i
+  -0.1776 + 0.0001i
+
+flag
+
+flag =
+
+     1
+
+%ok, there's a second solution
+
+
+
+
+
+
+$next:
+
+
+
+
+
+
+[x, fval, flag, output] = fsolve(F, [-5;5;.1], opt);
+
+x
+
+x =
+
+  -1.1456 + 0.0000i
+   2.0183 + 0.0000i
+   0.8500 + 0.0000i
+
+
+fval
+
+fval =
+
+   1.0e-14 *
+
+  -0.0888 + 0.0011i
+  -0.0444 + 0.0002i
+  -0.1776 + 0.0008i
+
+
+flag
+
+flag =
+
+     1
+
+
+
+
+%%%% ok that's three
+
+%%%% last one:
+
+
+
+
+[x, fval, flag, output] = fsolve(F, [.1;-4;3], opt);
+
+x
+
+x =
+
+    0.9641
+   -1.3348
+    1.4871
+
+fval
+
+fval =
+
+   1.0e-14 *
+
+    0.0444
+   -0.1776
+    0.1776
+
+flag
+
+flag =
+
+     1
+
+
+
+%it's a wrap
+
+
+
+
+
+2)
+
+
+
+
+
+
+clear
+
+
+
+
+%%% the functions to be solved must be continuous
+
+
+
+%a)
+
+F = @(x) [(x(1)^2 + x(2)^2 + x(3)^2 - 5);(x(1) + x(2) -1);(x(1)+x(3)-3)];
+
+opt = optimset('Tolfun', 1.0e-12, 'TolX', 1.0e-12, 'Display', 'off');
+
+
+[x, fval, flag, output] = fsolve(F, [1+sqrt(3)/2; 1-sqrt(3)/2; sqrt(3)], opt);
+
+x
+
+x =
+
+    1.6667
+   -0.6667
+    1.3333
+
+fval
+
+fval =
+
+   1.0e-12 *
+
+    0.1892
+    0.0004
+   -0.0009
+
+flag
+
+flag =
+
+     1
+
+
+
+
+
+%b)
+
+
+
+
+
+opt = optimset('Tolfun', 1.0e-12, 'TolX', 1.0e-12, 'Display', 'off');
+
+
+F = @(z) [(z(1) + 10*z(2));(sqrt(5)*(z(3)-z(4)));((z(2)-z(3))^2);(10*(z(1)-z(4))^2)];
+
+[z, fval, flag, output] = fsolve(F, [1;2;1;1], opt);
+
+
+z
+
+z =
+
+   1.0e-04 *
+
+   -0.1042
+    0.0104
+    0.0162
+    0.0162
+
+fval
+
+fval =
+
+   1.0e-08 *
+
+         0
+         0
+    0.0000
+    0.1450
+
+flag
+
+flag =
+
+     1
+
+
+
+
+
+
+
+%c)
+
+
+G = @(x) [((10^4)*x(1)*x(2)-1);(exp(-x(1))+exp(-x(2)) - 1.0001)];
+
+[x, fval, flag, output] = fsolve(G, [0;1], opt);
+
+
+x
+
+x =
+
+    0.0000
+    9.1061
+
+fval
+
+fval =
+
+   1.0e-15 *
+
+   -0.1110
+         0
+
+flag
+
+flag =
+
+     3
+
+%so, the change in residual was smaller than the specified tolerance
+
+opt = optimset('Tolfun', 1.0e-16, 'TolX', 1.0e-16, 'Display', 'off');
+
+[x, fval, flag, output] = fsolve(G, [0;1], opt);
+
+x
+
+x =
+
+    0.0000
+    9.1061
+
+
+flag
+
+flag =
+
+     3
+
+
+
+% after inspecting the functions, it seems the specified starting point
+ 
+
+[x, fval, flag, output] = fsolve(G, [0;1], optimset('Display','Iter'));
+
+                                         Norm of      First-order   Trust-region
+ Iteration  Func-count     f(x)          step         optimality    radius
+     0          3         1.13526                         1e+04               1
+     1          6         1.01719       0.999456          2e+04               1
+     2          7         1.01719       0.999261          2e+04               1
+     3         10       0.0354573       0.249815       3.51e+03            0.25
+     4         13      0.00364714       0.624538            624           0.625
+     5         14      0.00364714       0.997823            624            1.56
+     6         17      0.00195565       0.249456            171           0.249
+     7         18      0.00195565       0.623639            171           0.624
+     8         21      0.00141327        0.15591           72.3           0.156
+     9         24      0.00083536       0.389775            508            0.39
+    10         27     0.000387318       0.389775            392            0.39
+    11         30     0.000201283       0.389775            365            0.39
+    12         33     0.000108384       0.389775            334            0.39
+    13         36     6.21983e-05       0.389775            308            0.39
+    14         39     3.82262e-05       0.389775            286            0.39
+    15         42     2.51732e-05       0.389775            267            0.39
+    16         45     1.76364e-05       0.389775            250            0.39
+    17         48     1.29977e-05       0.389775            235            0.39
+    18         51      9.9578e-06       0.389775            222            0.39
+    19         54     7.85126e-06       0.389775            210            0.39
+    20         57     6.32301e-06       0.389775            199            0.39
+    21         60     5.17415e-06       0.389775            190            0.39
+    22         63     4.28701e-06       0.389775            181            0.39
+    23         66     1.38087e-06       0.308974            106            0.39
+    24         69     1.24167e-09      0.0593065           3.21            0.39
+    25         72     1.15454e-15     0.00184632        0.00309            0.39
+    26         75     7.75302e-28     1.6991e-06       2.53e-09            0.39
+
+<a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'eqn_solved','CSHelpWindow');">Equation solved</a>.
+
+fsolve completed because the vector of function values is near zero
+as measured by the default value of the <a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'fcn_tolerance_fsolve','CSHelpWindow');">function tolerance</a>, and
+the <a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'appears_regular','CSHelpWindow');">problem appears regular</a> as measured by the gradient.
+
+<<a href = "matlab: createExitMsg('trustnleqn',1.000000e+00,true,true,'fsolve',2.527466e-09,'default',1.000000e-06,7.753024e-28,'default',1.000000e-03,7.753024e-28,'default',1.000000e-03);">stopping criteria details</a>>
+
+
+
+
+
+
+
+
+
+%3)
+
+
+%a
+
+
+plot(t,y,'mo')
+
+%fits a line y(x) = 4.0127 + 0.53264*x;  91.371% of the variation in Y is explained by this model
+
+
+
+
+%b
+
+
+y(7) = [];
+
+t(7) = [];
+
+
+
+plot(t,y,'rx');
+
+%the pattern is sinusoidal, as far as I can tell
+
+
+
+
+%c
+
+
+X = [sin(t) t ones(size(t))];
+
+Xt = X';
+Xp = Xt*X;
+b = Xt*y;
+A = (Xp^-1)*b;
+r = X*A - y;
+
+
+%d
+
+
+g = @(t) A(1)*sin(t) + A(2)*t + A(3);
+
+ezplot(g)
+hold on; plot(t,y,'rx')
+ezplot(g,[0,24])
+
+
+
+
+%5)
+
+
+
+
+%a
+
+
+
+
+H = [xa.^2 xa ones(size(xa))];
+
+Ht = H';
+Hp = Ht*H;
+b = Ht*ya;
+c=Hp\b
+
+c =
+
+    0.0000
+   -0.0002
+  101.0000
+
+g = @(xa) c(1)*xa.^2 + c(2)*xa + c(3);
+
+
+ezplot(g, [1.0e6 1.3e06]);
+hold on; plot(xa,ya,'r+');
+
+
+
+
+r = H*c - ya;
+norm = sum(r.*r)
+
+norm =
+
+   4.2458e-23
+
+%no error message
+
+
+
+
+
+%b
+
+
+bigL = [xb.^2 xb ones(size(xb))];
+bigLt = bigL';
+bigLp = bigLt*bigL;
+pac = bigLt*yb;
+powpow = bigLp\pac;
+
+
+nas = @(xb) powpow(1)*xb.^2 + powpow(2)*xb + powpow(3);
+
+
+ezplot(nas, [1.0e07 1.3e07]); hold on; grid on; plot(xb,yb, 'r+');
+
+
+r = bigL*powpow - yb
+
+r =
+
+   1.0e-08 *
+
+   -0.9313
+    0.7451
+    0.7451
+   -0.7451
+
+norm = sum(r.*r)
+
+norm =
+
+   2.5327e-16
+
+
+%that's a solid fit...
+
+
+
+
+
+%c
+
+
+
+
+
+xs = -2 + (4/max(xb) - min(xb))*(xb - min(xb))
+
+xs =
+
+   1.0e+13 *
+
+   -0.0000
+   -1.0000
+   -2.0000
+   -3.0000
+
+
+
+
+shady = [xs.^2 xs ones(size(xs))];
+slimshady = shady';
+realslimshady = slimshady*shady;
+eminem = slimshady*yb; 
+dre = realslimshady\eminem;
+
+
+mobbdeep = @(xs) dre(1)*xs.^2 + dre(2)*xs + dre(3);
+
+
+ezplot(mobbdeep,[-3.5e13,0]); hold on; grid on; plot(xs,yb,'r+')
+
+
+rza = shady*dre - yb;
+
+nucca = sum(rza.*rza)
+
+nucca =
+
+   3.1225e-17
+
+
+
+
+
+
+%6
+
+
+
+
+
+
+
+plot(x6,y6,'g+');
+plot(x6,y6,,[-8,8],[-8,8],'g+');
+ plot(x6,y6,,[-8,8],[-8,8],'g+');
+           |
+{Error: Expression or statement is incorrect--possibly unbalanced (, {,
+or [.
+} 
+plot(x6,y6,[-8,8],[-8,8],'g+');
+plot(x6,y6,'g+');
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 8.047590 
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 327.119064 
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 8.047590 
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 327.119064 
+
+polyfit(x6,y6,5)
+
+ans =
+
+    0.0058    0.0887   -0.1565   -0.6645    0.9898    0.4968
+
+plot(x6,y6,'g+');
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 8.047590 
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 327.119064 
+
+
+
+
+plot(x6,y6,'r+')
+
+
+%tools -> basic fit -> 6th degree, norm is 0.63234 -> 7th degree,
+%norm is 0.63175 -> 8th degree, norm is 0.077307 -> 9th, norm is
+%0.077301.    The difference betweent 8th degree and 9th degress is
+%so relatively small, that it's not worth foregoing degrees of freedom
+%for such a marginal improvement in precision.
+
+
+
+%8th degree:
+
+
+polyfit(x6,y6,8)
+
+ans =
+
+  Columns 1 through 7
+
+    0.0023   -0.0002   -0.0626    0.0080    0.5925   -0.1660   -1.9251
+
+  Columns 8 through 9
+
+    0.9996    0.9879
+
+p6 = polyfit(x6,y6,8)
+
+p6 =
+
+  Columns 1 through 7
+
+    0.0023   -0.0002   -0.0626    0.0080    0.5925   -0.1660   -1.9251
+
+  Columns 8 through 9
+
+    0.9996    0.9879
+
+xx66 = linspace(-3,3,200);
+plot(xx66,polyval(p6,xx66),'b',x6,y6,'m+')
+X
+{Undefined function or variable 'X'.
+} 
+
+
+X = [x6.^8 x6.^7 x6.^6 x6.^5 x6.^4 x6.^3 x6.^2 x6 ones(size(x6))]
+
+X =
+
+   1.0e+03 *
+
+  Columns 1 through 6
+
+    6.5610   -2.1870    0.7290   -0.2430    0.0810   -0.0270
+    5.0025   -1.7250    0.5948   -0.2051    0.0707   -0.0244
+    3.7780   -1.3493    0.4819   -0.1721    0.0615   -0.0220
+    2.8243   -1.0460    0.3874   -0.1435    0.0531   -0.0197
+    2.0883   -0.8032    0.3089   -0.1188    0.0457   -0.0176
+    1.5259   -0.6104    0.2441   -0.0977    0.0391   -0.0156
+    1.1008   -0.4586    0.1911   -0.0796    0.0332   -0.0138
+    0.7831   -0.3405    0.1480   -0.0644    0.0280   -0.0122
+    0.5488   -0.2494    0.1134   -0.0515    0.0234   -0.0106
+    0.3782   -0.1801    0.0858   -0.0408    0.0194   -0.0093
+    0.2560   -0.1280    0.0640   -0.0320    0.0160   -0.0080
+    0.1698   -0.0894    0.0470   -0.0248    0.0130   -0.0069
+    0.1102   -0.0612    0.0340   -0.0189    0.0105   -0.0058
+    0.0698   -0.0410    0.0241   -0.0142    0.0084   -0.0049
+    0.0429   -0.0268    0.0168   -0.0105    0.0066   -0.0041
+    0.0256   -0.0171    0.0114   -0.0076    0.0051   -0.0034
+    0.0148   -0.0105    0.0075   -0.0054    0.0038   -0.0027
+    0.0082   -0.0063    0.0048   -0.0037    0.0029   -0.0022
+    0.0043   -0.0036    0.0030   -0.0025    0.0021   -0.0017
+    0.0021   -0.0019    0.0018   -0.0016    0.0015   -0.0013
+    0.0010   -0.0010    0.0010   -0.0010    0.0010   -0.0010
+    0.0004   -0.0005    0.0005   -0.0006    0.0007   -0.0007
+    0.0002   -0.0002    0.0003   -0.0003    0.0004   -0.0005
+    0.0001   -0.0001    0.0001   -0.0002    0.0002   -0.0003
+    0.0000   -0.0000    0.0000   -0.0001    0.0001   -0.0002
+    0.0000   -0.0000    0.0000   -0.0000    0.0001   -0.0001
+    0.0000   -0.0000    0.0000   -0.0000    0.0000   -0.0001
+    0.0000   -0.0000    0.0000   -0.0000    0.0000   -0.0000
+    0.0000   -0.0000    0.0000   -0.0000    0.0000   -0.0000
+    0.0000   -0.0000    0.0000   -0.0000    0.0000   -0.0000
+         0         0         0         0         0         0
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0000
+    0.0000    0.0000    0.0000    0.0000    0.0000    0.0001
+    0.0000    0.0000    0.0000    0.0000    0.0001    0.0001
+    0.0000    0.0000    0.0000    0.0001    0.0001    0.0002
+    0.0001    0.0001    0.0001    0.0002    0.0002    0.0003
+    0.0002    0.0002    0.0003    0.0003    0.0004    0.0005
+    0.0004    0.0005    0.0005    0.0006    0.0007    0.0007
+    0.0010    0.0010    0.0010    0.0010    0.0010    0.0010
+    0.0021    0.0019    0.0018    0.0016    0.0015    0.0013
+    0.0043    0.0036    0.0030    0.0025    0.0021    0.0017
+    0.0082    0.0063    0.0048    0.0037    0.0029    0.0022
+    0.0148    0.0105    0.0075    0.0054    0.0038    0.0027
+    0.0256    0.0171    0.0114    0.0076    0.0051    0.0034
+    0.0429    0.0268    0.0168    0.0105    0.0066    0.0041
+    0.0698    0.0410    0.0241    0.0142    0.0084    0.0049
+    0.1102    0.0612    0.0340    0.0189    0.0105    0.0058
+    0.1698    0.0894    0.0470    0.0248    0.0130    0.0069
+    0.2560    0.1280    0.0640    0.0320    0.0160    0.0080
+    0.3782    0.1801    0.0858    0.0408    0.0194    0.0093
+    0.5488    0.2494    0.1134    0.0515    0.0234    0.0106
+    0.7831    0.3405    0.1480    0.0644    0.0280    0.0122
+    1.1008    0.4586    0.1911    0.0796    0.0332    0.0138
+    1.5259    0.6104    0.2441    0.0977    0.0391    0.0156
+    2.0883    0.8032    0.3089    0.1188    0.0457    0.0176
+    2.8243    1.0460    0.3874    0.1435    0.0531    0.0197
+    3.7780    1.3493    0.4819    0.1721    0.0615    0.0220
+    5.0025    1.7250    0.5948    0.2051    0.0707    0.0244
+    6.5610    2.1870    0.7290    0.2430    0.0810    0.0270
+
+  Columns 7 through 9
+
+    0.0090   -0.0030    0.0010
+    0.0084   -0.0029    0.0010
+    0.0078   -0.0028    0.0010
+    0.0073   -0.0027    0.0010
+    0.0068   -0.0026    0.0010
+    0.0063   -0.0025    0.0010
+    0.0058   -0.0024    0.0010
+    0.0053   -0.0023    0.0010
+    0.0048   -0.0022    0.0010
+    0.0044   -0.0021    0.0010
+    0.0040   -0.0020    0.0010
+    0.0036   -0.0019    0.0010
+    0.0032   -0.0018    0.0010
+    0.0029   -0.0017    0.0010
+    0.0026   -0.0016    0.0010
+    0.0022   -0.0015    0.0010
+    0.0020   -0.0014    0.0010
+    0.0017   -0.0013    0.0010
+    0.0014   -0.0012    0.0010
+    0.0012   -0.0011    0.0010
+    0.0010   -0.0010    0.0010
+    0.0008   -0.0009    0.0010
+    0.0006   -0.0008    0.0010
+    0.0005   -0.0007    0.0010
+    0.0004   -0.0006    0.0010
+    0.0003   -0.0005    0.0010
+    0.0002   -0.0004    0.0010
+    0.0001   -0.0003    0.0010
+    0.0000   -0.0002    0.0010
+    0.0000   -0.0001    0.0010
+         0         0    0.0010
+    0.0000    0.0001    0.0010
+    0.0000    0.0002    0.0010
+    0.0001    0.0003    0.0010
+    0.0002    0.0004    0.0010
+    0.0003    0.0005    0.0010
+    0.0004    0.0006    0.0010
+    0.0005    0.0007    0.0010
+    0.0006    0.0008    0.0010
+    0.0008    0.0009    0.0010
+    0.0010    0.0010    0.0010
+    0.0012    0.0011    0.0010
+    0.0014    0.0012    0.0010
+    0.0017    0.0013    0.0010
+    0.0020    0.0014    0.0010
+    0.0022    0.0015    0.0010
+    0.0026    0.0016    0.0010
+    0.0029    0.0017    0.0010
+    0.0032    0.0018    0.0010
+    0.0036    0.0019    0.0010
+    0.0040    0.0020    0.0010
+    0.0044    0.0021    0.0010
+    0.0048    0.0022    0.0010
+    0.0053    0.0023    0.0010
+    0.0058    0.0024    0.0010
+    0.0063    0.0025    0.0010
+    0.0068    0.0026    0.0010
+    0.0073    0.0027    0.0010
+    0.0078    0.0028    0.0010
+    0.0084    0.0029    0.0010
+    0.0090    0.0030    0.0010
+
+r = X*p6 - y6
+{Error using <a href="matlab:helpUtils.errorDocCallback('mtimes')" style="font-weight:bold"> * </a>
+Inner matrix dimensions must agree.
+} 
+r = X*p6' - y6;
+r
+
+r =
+
+    0.0175
+   -0.0137
+   -0.0174
+   -0.0092
+    0.0016
+    0.0099
+    0.0138
+    0.0133
+    0.0093
+    0.0035
+   -0.0027
+   -0.0080
+   -0.0115
+   -0.0128
+   -0.0118
+   -0.0090
+   -0.0049
+   -0.0002
+    0.0045
+    0.0084
+    0.0111
+    0.0122
+    0.0118
+    0.0098
+    0.0065
+    0.0025
+   -0.0018
+   -0.0059
+   -0.0092
+   -0.0114
+   -0.0121
+   -0.0114
+   -0.0093
+   -0.0061
+   -0.0021
+    0.0022
+    0.0063
+    0.0095
+    0.0116
+    0.0122
+    0.0111
+    0.0085
+    0.0047
+    0.0001
+   -0.0046
+   -0.0088
+   -0.0116
+   -0.0126
+   -0.0114
+   -0.0080
+   -0.0028
+    0.0032
+    0.0090
+    0.0130
+    0.0136
+    0.0099
+    0.0018
+   -0.0088
+   -0.0170
+   -0.0135
+    0.0170
+
+norm6 = sum(r.*r)
+
+norm6 =
+
+    0.0060
+
+norm6 = sum(r.*r.)
+ norm6 = sum(r.*r.)
+                 |
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+norm6 = sum(r.*r)
+
+norm6 =
+
+    0.0060
+
+% degrees of freedom = 61 - 9 = 52
+
+residstandev = sqrt(norm6/52)
+
+residstandev =
+
+    0.0107
+
+
+
+
+
+
+
+
+%7j
+
+
+
+
+
+
+
+
+plot(xm,ym,'po')
+{Error using <a href="matlab:helpUtils.errorDocCallback('plot')" style="font-weight:bold">plot</a>
+Error in color/linetype argument
+} 
+plot(xm,ym,'co')
+plot(xm,ym,'mo')
+
+
+%fitted a logarithmic function of the form a(1 - exp(-bx))
+%where a=238.94 and b=1817.7 and R = 0.99999
+
+a = 238.94; b = 1817.7;
+
+r = a(1-exp(-xm/b)) - ym
+{Subscript indices must either be real positive integers or logicals.
+} 
+r = a(1-exp(-xm./b)) - ym
+{Subscript indices must either be real positive integers or logicals.
+} 
+Z = [a(1-exp(-xm/b))];
+{Subscript indices must either be real positive integers or logicals.
+} 
+exp(xm)
+
+ans =
+
+  1.0e+299 *
+
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    0.0000
+    1.8721
+       Inf
+
+exp(xm/b)
+
+ans =
+
+    1.0436
+    1.0653
+    1.0807
+    1.1107
+    1.1411
+    1.1723
+    1.2009
+    1.2314
+    1.2702
+    1.3003
+    1.3436
+    1.3858
+    1.4610
+    1.5191
+
+exp(-xm/b);
+exp(-xm/b);
+
+
+diary off
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+plot(xm,ym,'g+')
+
+
+diary off
+
+
+
+f = @(x) (238.94*(1 - exp(-x*1817.7))
+ f = @(x) (238.94*(1 - exp(-x*1817.7))
+                                     |
+{Error: Expression or statement is incorrect--possibly unbalanced
+(, {, or [.
+} 
+f = @(x) (238.94*(1 - exp(-x*1817.7)))
+
+f = 
+
+    @(x)(238.94*(1-exp(-x*1817.7)))
+
+f(xm)
+
+ans =
+
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+
+f = @(x) (238.94*(1 - exp(-x.*1817.7)))
+
+f = 
+
+    @(x)(238.94*(1-exp(-x.*1817.7)))
+
+f(xm)
+
+ans =
+
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+
+f(xm) - xm
+
+ans =
+
+  161.3400
+  124.0400
+   97.8400
+   48.1400
+   -0.9600
+  -50.0600
+  -93.8600
+ -139.4600
+ -195.8600
+ -238.3600
+ -297.8600
+ -354.1600
+ -450.1600
+ -521.0600
+
+xm
+
+xm =
+
+   77.6000
+  114.9000
+  141.1000
+  190.8000
+  239.9000
+  289.0000
+  332.8000
+  378.4000
+  434.8000
+  477.3000
+  536.8000
+  593.1000
+  689.1000
+  760.0000
+
+ym
+
+ym =
+
+   10.0700
+   14.7300
+   17.9400
+   23.9300
+   29.6100
+   35.1800
+   40.0200
+   44.8200
+   50.7600
+   55.0500
+   61.0100
+   66.4000
+   75.4700
+   81.7800
+
+f = 238.94*(1 - exp(-xm*1817.7)))
+ f = 238.94*(1 - exp(-xm*1817.7)))
+                                |
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+f = 238.94*(1 - exp(-xm*1817.7))
+
+f =
+
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+
+f = @(x) (238.94*(1 - exp(-x.*1817.7)))
+
+f = 
+
+    @(x)(238.94*(1-exp(-x.*1817.7)))
+
+g = [238.94*(1-exp(-x*1817.7))]
+{Undefined function or variable 'x'.
+} 
+g = [238.94*(1-exp(-xm*1817.7))]
+
+g =
+
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+
+f = @(x) (238.94*(1 - exp(-x.*1817.7)))
+
+f = 
+
+    @(x)(238.94*(1-exp(-x.*1817.7)))
+
+f(xm)
+
+ans =
+
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+
+f(ym)
+
+ans =
+
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+  238.9400
+
+f(4)
+
+ans =
+
+  238.9400
+
+g = 238.94*ones(14,1);
+xmg = xm*1817.7
+
+xmg =
+
+   1.0e+06 *
+
+    0.1411
+    0.2089
+    0.2565
+    0.3468
+    0.4361
+    0.5253
+    0.6049
+    0.6878
+    0.7903
+    0.8676
+    0.9757
+    1.0781
+    1.2526
+    1.3815
+
+expxmg = exp(xmg)
+
+expxmg =
+
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+   Inf
+
+f = @(x) (238.94*(1 - exp(-x./1817.7)))
+
+f = 
+
+    @(x)(238.94*(1-exp(-x./1817.7)))
+
+f(xm)
+
+ans =
+
+    9.9860
+   14.6363
+   17.8462
+   23.8095
+   29.5429
+   35.1234
+   39.9760
+   44.9052
+   50.8334
+   55.1805
+   61.0982
+   66.5221
+   75.3919
+   81.6484
+
+ym - f(xm)
+
+ans =
+
+    0.0840
+    0.0937
+    0.0938
+    0.1205
+    0.0671
+    0.0566
+    0.0440
+   -0.0852
+   -0.0734
+   -0.1305
+   -0.0882
+   -0.1221
+    0.0781
+    0.1316
+
+r = ym - f(xm);
+
+sqerror = sum(r.*r)
+
+sqerror =
+
+    0.1246
+
+rmse = (sqerror/length(r))
+
+rmse =
+
+    0.0089
+
+
+
+
+diary off
+
+
+
+
+%8
+
+
+
+
+
+
+
+plot(xk2,yk2,'m+')
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 3045.087802 
+
+Equation: y(x) = (a+b*x+c*x^2)/(d+e*x+f*x^2)
+     a = 4.4339e+13
+     b = -2.2235e+14
+     c = 2.0903e+13
+     d = -4.2022e+13
+     e = 8.9581e+13
+     f = -3.7039e+10
+     R = 0.98751  (lin)
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 541103.347141 
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 541103.347141 
+
+RSS = 0.9999*r;
+RSS = 0.9999*sqerror;
+RSS = 0.9999*sqerror
+
+RSS =
+
+    0.1246
+
+rmse = (RSS/length(r))
+
+rmse =
+
+    0.0089
+
+diary off
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+plot(xk2,yk2,'m+')
+shotfit( '((a + b*x + c*x^2)/(d + e*x + f*x^2)) a = 5; b = 10; c = 20; d = 1; e = 4; f = 10')
+{Undefined function 'shotfit' for input arguments of type 'char'.
+} 
+showfit( '((a + b*x + c*x^2)/(d + e*x + f*x^2)) a = 5; b = 10; c = 20; d = 1; e = 4; f = 10')
+Equation: ((a+b*x+c*x^2) = 5
+     x = 1
+     R = 0.066699  (lin)
+showfit( '((a + b*x + c*x^2)/(d + e*x + f*x^2))')
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 3045.087802 
+
+Equation: y(x) = ((a+b*x+c*x^2)/(d+e*x+f*x^2))
+     a = 4.4339e+13
+     b = -2.2235e+14
+     c = 2.0903e+13
+     d = -4.2022e+13
+     e = 8.9581e+13
+     f = -3.7039e+10
+     R = 0.98751  (lin)
+
+
+
+showfit( '((a + b*x + c*x^2)/(d + e*x + f*x^2))')
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 3045.087802 
+
+Equation: y(x) = ((a+b*x+c*x^2)/(d+e*x+f*x^2))
+     a = 4.4339e+13
+     b = -2.2235e+14
+     c = 2.0903e+13
+     d = -4.2022e+13
+     e = 8.9581e+13
+     f = -3.7039e+10
+     R = 0.98751  (lin)
+showfit( '((a + b*x + c*x^2)/(d + e*x + f*x^2)) a = 4e13; b = -2e14; c = 2e13; d = 14e13; e = 9e13; -3e10')
+Equation: ((a+b*x+c*x^2) = 4e13
+     x = 1
+     R = 0.081111  (lin)
+clear f
+showfit( '((a + b*x + c*x^2)/(d + e*x + f*x^2)) a = 4e13; b = -2e14; c = 2e13; d = 14e13; e = 9e13; -3e10')
+Equation: ((a+b*x+c*x^2) = 4e13
+     x = 1
+     R = 0.081111  (lin)
+showfit( '((a + b*x + c*x^2)/(d + e*x + f*x^2))')
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 3045.087802 
+
+Equation: y(x) = ((a+b*x+c*x^2)/(d+e*x+f*x^2))
+     a = 4.4339e+13
+     b = -2.2235e+14
+     c = 2.0903e+13
+     d = -4.2022e+13
+     e = 8.9581e+13
+     f = -3.7039e+10
+     R = 0.98751  (lin)
+cftool
+
+
+
+
+
+diary off
